@@ -1,0 +1,376 @@
+/* ============================================================
+   course.css — shared stylesheet for all lessons and reference
+   sheets in this workspace.
+
+   Identity: a technical workbench sheet. Ink on cool paper, one
+   ochre signal for "you are here / do this", one green for
+   "verified". IBM Plex superfamily — an industrial type family
+   for an industrial subject; Mono is load-bearing here because
+   file paths and YAML are the actual material.
+
+   Link from any lesson with:
+     <link rel="stylesheet" href="../assets/course.css">
+   ============================================================ */
+
+/* ---------- tokens: light is the base, complete ---------- */
+:root {
+  --ink:        #15191f;
+  --paper:      #f2f4f6;
+  --panel:      #ffffff;
+  --panel-sunk: #e9ecf0;
+  --rule:       #d3d8df;
+  --rule-soft:  #e4e8ed;
+  --muted:      #5c6673;
+  --signal:     #b4690e;
+  --signal-bg:  #fdf4e6;
+  --verified:   #1d6b4f;
+  --verified-bg:#ebf5f0;
+  --alarm:      #a3341f;
+
+  --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --measure: 68ch;
+  --gutter:  7.5rem;
+
+  --s1: .35rem;  --s2: .6rem;   --s3: 1rem;
+  --s4: 1.6rem;  --s5: 2.4rem;  --s6: 3.6rem;
+}
+
+/* ---------- tokens: dark, for system-dark and explicit dark ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink:        #e6e9ed;
+    --paper:      #12161b;
+    --panel:      #1a1f26;
+    --panel-sunk: #0d1116;
+    --rule:       #2c333c;
+    --rule-soft:  #222831;
+    --muted:      #9aa5b1;
+    --signal:     #e8a33d;
+    --signal-bg:  #251c0c;
+    --verified:   #4ebe92;
+    --verified-bg:#0f2018;
+    --alarm:      #e8836b;
+  }
+}
+:root[data-theme="dark"] {
+  --ink:        #e6e9ed;
+  --paper:      #12161b;
+  --panel:      #1a1f26;
+  --panel-sunk: #0d1116;
+  --rule:       #2c333c;
+  --rule-soft:  #222831;
+  --muted:      #9aa5b1;
+  --signal:     #e8a33d;
+  --signal-bg:  #251c0c;
+  --verified:   #4ebe92;
+  --verified-bg:#0f2018;
+  --alarm:      #e8836b;
+}
+
+/* ---------- reset-ish ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { max-width: 100%; }
+
+/* ---------- page frame: content column + mono gutter ---------- */
+.sheet {
+  max-width: calc(var(--measure) + var(--gutter) + 4rem);
+  margin: 0 auto;
+  padding: var(--s5) var(--s4) var(--s6);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--gutter) minmax(0, 1fr);
+  gap: 0 var(--s4);
+  align-items: start;
+}
+.row + .row { margin-top: var(--s5); }
+
+/* the gutter marker encodes the stage — a real sequence, not decoration */
+.mark {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: .5rem;
+  text-align: right;
+  border-right: 1px solid var(--rule-soft);
+  padding-right: var(--s3);
+  align-self: stretch;
+}
+.mark b { display: block; color: var(--signal); font-weight: 600; }
+
+.body > * + * { margin-top: var(--s3); }
+
+/* ---------- masthead ---------- */
+.masthead { margin-bottom: var(--s5); padding-bottom: var(--s4); border-bottom: 2px solid var(--ink); }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin: 0 0 var(--s2);
+}
+.masthead h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+  margin: 0;
+}
+.standfirst {
+  font-size: 1.06rem;
+  color: var(--muted);
+  max-width: 58ch;
+  margin: var(--s3) 0 0;
+  text-wrap: pretty;
+}
+
+/* ---------- chips: at-a-glance lesson facts ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: var(--s3); }
+.chip {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  padding: .28rem .55rem;
+}
+
+/* ---------- hint: secondary guidance under a heading or step ---------- */
+.hint { color: var(--muted); font-size: .94rem; max-width: var(--measure); }
+
+/* ---------- headings ---------- */
+h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.42rem;
+  line-height: 1.22;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+  margin: 0 0 var(--s2);
+}
+h3 {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: .005em;
+  margin: 0 0 var(--s1);
+}
+p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
+
+a { color: var(--ink); text-decoration-color: var(--signal); text-decoration-thickness: 2px; text-underline-offset: .18em; }
+a:hover { color: var(--signal); }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: 2px; }
+
+/* ---------- inline material ---------- */
+code, kbd, .path {
+  font-family: var(--mono);
+  font-size: .87em;
+  background: var(--panel-sunk);
+  border: 1px solid var(--rule-soft);
+  border-radius: 3px;
+  padding: .1em .34em;
+}
+kbd { box-shadow: 0 1px 0 var(--rule); }
+
+/* ---------- panels: spent by role, not stamped on everything ---------- */
+.panel { background: var(--panel); border: 1px solid var(--rule); padding: var(--s3) var(--s4); }
+
+/* the one thing on the page that needs lifting: what to actually do */
+.do {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--signal);
+  padding: var(--s3) var(--s4);
+}
+.do > h3 { color: var(--signal); font-family: var(--mono); font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; }
+
+.aside { border-left: 2px solid var(--rule); padding-left: var(--s3); color: var(--muted); font-size: .95rem; }
+
+/* the on-ramp block: for coding concepts he has never met */
+.onramp {
+  background: var(--panel-sunk);
+  border: 1px dashed var(--rule);
+  padding: var(--s3) var(--s4);
+  font-size: .96rem;
+}
+.onramp > h3::before { content: "New word · "; font-family: var(--mono); color: var(--signal); font-weight: 600; }
+
+.warn { border-left: 4px solid var(--alarm); background: var(--panel); padding: var(--s3) var(--s4); }
+
+/* ---------- code blocks ---------- */
+pre {
+  font-family: var(--mono);
+  font-size: .84rem;
+  line-height: 1.6;
+  background: var(--panel-sunk);
+  border: 1px solid var(--rule);
+  padding: var(--s3);
+  margin: 0;
+  overflow-x: auto;
+  tab-size: 2;
+}
+pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+
+/* ---------- steps: numbered only because order carries meaning ---------- */
+/* Markers are positioned, NOT grid columns. A grid `li` makes every child —
+   including bare text nodes — its own grid item, so an item mixing text and
+   inline elements gets torn across cells. Absolute markers keep the content
+   flowing as normal inline text however it is authored. */
+ol.steps { list-style: none; counter-reset: st; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+ol.steps > li {
+  counter-increment: st;
+  position: relative;
+  padding-left: 2.9rem;
+  min-height: 1.9rem;
+}
+ol.steps > li::before {
+  content: counter(st);
+  position: absolute;
+  left: 0; top: 0;
+  font-family: var(--mono);
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--signal);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 1.9rem; height: 1.9rem;
+  display: grid; place-items: center;
+  background: var(--panel);
+}
+ol.steps > li > * + * { margin-top: var(--s2); }
+
+ul.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+ul.plain > li { position: relative; padding-left: 1.7rem; }
+ul.plain > li::before {
+  content: "—";
+  position: absolute;
+  left: 0; top: 0;
+  font-family: var(--mono);
+  color: var(--muted);
+}
+
+/* ---------- meter: usage-reading recorder (assets/meter.js) ---------- */
+.meter { border: 1px solid var(--rule); background: var(--panel); padding: var(--s3) var(--s4); }
+.meter-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--s3); }
+.meter-field { display: grid; gap: .3rem; }
+.meter-field > span {
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.meter-field > input {
+  font: inherit;
+  font-family: var(--mono);
+  font-size: .9rem;
+  background: var(--panel-sunk);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  padding: .45rem .6rem;
+  min-width: 0;
+}
+.meter-field > input:focus { outline: 2px solid var(--signal); outline-offset: 1px; }
+.meter-bar { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; margin-top: var(--s3); }
+.meter-save {
+  font: inherit;
+  font-family: var(--mono);
+  font-size: .74rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  padding: .55rem 1rem;
+  cursor: pointer;
+}
+.meter-save:hover { background: var(--verified); border-color: var(--verified); color: #fff; }
+.meter-said { font-family: var(--mono); font-size: .72rem; color: var(--verified); font-weight: 600; }
+.meter-said[hidden] { display: none !important; }
+.meter-rows { margin-top: var(--s3); }
+.meter-empty { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+.meter-rows td { font-family: var(--mono); font-size: .82rem; font-variant-numeric: tabular-nums; }
+.meter-rows td.meter-when { font-family: var(--sans); font-size: .88rem; color: var(--ink); }
+
+/* ---------- self-check: retrieval practice, immediate feedback ---------- */
+.check { display: grid; gap: var(--s4); }
+.q { background: var(--panel); border: 1px solid var(--rule); padding: var(--s3) var(--s4); }
+.q > p:first-child { font-weight: 600; margin-bottom: var(--s3); }
+.opts { display: grid; gap: var(--s2); }
+.opt {
+  font: inherit;
+  text-align: left;
+  background: var(--panel-sunk);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  padding: .6rem .8rem;
+  cursor: pointer;
+}
+.opt:hover:not([disabled]) { border-color: var(--signal); }
+.opt[disabled] { cursor: default; }
+.opt.right { border-color: var(--verified); background: var(--verified-bg); color: var(--verified); font-weight: 600; }
+.opt.wrong { border-color: var(--alarm); opacity: .65; text-decoration: line-through; }
+.why {
+  margin-top: var(--s3);
+  font-size: .95rem;
+  color: var(--muted);
+  border-left: 2px solid var(--verified);
+  padding-left: var(--s3);
+}
+.why[hidden] { display: none !important; }
+
+/* ---------- footer / links out ---------- */
+.foot { margin-top: var(--s6); padding-top: var(--s4); border-top: 1px solid var(--rule); font-size: .95rem; color: var(--muted); }
+.foot h3 { color: var(--ink); }
+.ask { border-left: 4px solid var(--verified); background: var(--verified-bg); color: var(--ink); padding: var(--s3) var(--s4); }
+
+table { border-collapse: collapse; width: 100%; font-size: .94rem; }
+th, td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+th { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.scroll { overflow-x: auto; }
+
+/* ---------- narrow screens: gutter marker goes inline ---------- */
+@media (max-width: 46rem) {
+  .row { grid-template-columns: minmax(0, 1fr); gap: var(--s2); }
+  .mark {
+    text-align: left;
+    border-right: 0;
+    border-left: 3px solid var(--signal);
+    padding: 0 0 0 var(--s2);
+    display: flex; gap: .5rem;
+  }
+  .sheet { padding: var(--s4) var(--s3) var(--s5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+@media print {
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .opt, .do { break-inside: avoid; }
+  .why { display: block !important; }
+  a::after { content: " (" attr(href) ")"; font-size: .8em; color: #555; word-break: break-all; }
+}

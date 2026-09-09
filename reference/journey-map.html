@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Journey Map — Master Processes with Claude</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/course.css">
+<style>
+  .stage { margin-top: var(--s5); }
+  .stage.parked { opacity: .72; }
+  .stage-head { display:flex; gap:.8rem; align-items:baseline; border-bottom:2px solid var(--ink); padding-bottom:.5rem; margin-bottom:.9rem; flex-wrap:wrap; }
+  .stage-head .n { font-family:var(--mono); font-size:.72rem; font-weight:600; letter-spacing:.14em; color:var(--signal); flex:none; }
+  .stage-head h2 { margin:0; flex:1; min-width:8rem; }
+  .gate { font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--verified); border:1px solid var(--verified); padding:.2rem .45rem; flex:none; }
+  .gate.blocked { color:var(--alarm); border-color:var(--alarm); }
+  .gate.off { color:var(--muted); border-color:var(--rule); }
+
+  .lesson { display:grid; grid-template-columns:1.5rem 3rem minmax(0,1fr) 4.2rem; gap:.9rem; padding:.7rem 0; border-bottom:1px solid var(--rule-soft); align-items:baseline; }
+  .lesson:last-child { border-bottom:0; }
+  .dot { font-family:var(--mono); font-size:.9rem; color:var(--rule); text-align:center; }
+  .lesson[data-state="now"] .dot { color:var(--signal); }
+  .lesson[data-state="ready"] .dot { color:var(--verified); }
+  .lid { font-family:var(--mono); font-size:.74rem; color:var(--muted); font-weight:500; }
+  .lesson[data-state="now"] .lid { color:var(--signal); font-weight:600; }
+  .ltitle { font-weight:600; font-size:.99rem; }
+  .lwin { color:var(--muted); font-size:.92rem; margin-top:.15rem; }
+  .lwin b { color:var(--ink); font-weight:500; }
+  .mins { font-family:var(--mono); font-size:.72rem; color:var(--muted); text-align:right; font-variant-numeric:tabular-nums; }
+  .lesson[data-state="now"] { background:var(--signal-bg); margin-inline:-.7rem; padding-inline:.7rem; }
+  .lesson[data-recall] .ltitle::after {
+    content: "recall"; font-family:var(--mono); font-size:.6rem; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--verified); border:1px solid var(--verified);
+    padding:.08rem .3rem; margin-left:.5rem; vertical-align:.1em; white-space:nowrap;
+  }
+
+  .budget { display:grid; grid-template-columns:repeat(auto-fit,minmax(9rem,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:var(--s3); }
+  .budget div { background:var(--panel); padding:.8rem 1rem; }
+  .budget dt { font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+  .budget dd { margin:.25rem 0 0; font-family:var(--serif); font-size:1.5rem; font-weight:600; line-height:1; }
+  .budget dd small { font-family:var(--sans); font-size:.8rem; font-weight:400; color:var(--muted); display:block; margin-top:.25rem; }
+  .lesson[data-track="B"] .lid { color:var(--verified); }
+  .lesson[data-track="B"] { border-left:3px solid var(--verified); padding-left:.7rem; margin-left:-.7rem; }
+  .when { font-family:var(--mono); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--verified); border:1px solid var(--verified); padding:.1rem .35rem; margin-left:.5rem; white-space:nowrap; }
+  @media (max-width:34rem){ .lesson { grid-template-columns:1.3rem 2.6rem minmax(0,1fr); } .mins { display:none; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <p class="eyebrow">Reference sheet · Journey map · Revised from intake</p>
+    <h1>Twelve lessons to a process someone else can run</h1>
+    <p class="standfirst">Built around your own words: <em>master processes which can be transferred and implemented</em>. Every lesson fits inside fifteen minutes, so one lands comfortably in a week. The finish line is not you being faster — it is a colleague getting your output without your explanation.</p>
+    <dl class="budget">
+      <div><dt>Main path</dt><dd>9<small>lessons, L01 to L09</small></dd></div>
+      <div><dt>Track B</dt><dd>3<small>usage &amp; context, woven in</small></dd></div>
+      <div><dt>Each lesson</dt><dd>≤15<small>minutes, hands on keys</small></dd></div>
+      <div><dt>Ready now</dt><dd>3<small>L01, L02 and B1</small></dd></div>
+    </dl>
+  </div>
+
+  <div class="aside">
+    <strong>Track B — usage and context.</strong> Three green lessons now run alongside the main
+    path, because a process that dies halfway through when your allowance runs out is not
+    actually implemented. They are deliberately <em>not</em> grouped into a block: a budget means
+    nothing until you have felt the constraint, so B1 takes a baseline reading now, B2 lands the
+    moment after your first Cowork run while it is still fresh, and B3 changes how you scope work.
+    <br><br>
+    <strong>What changed after your intake answers.</strong> Three things. Cowork is confirmed available
+    on your Pro plan, so Stage 03 is real rather than hypothetical. Every example is Microsoft —
+    Outlook, Teams, Excel, PowerPoint, SharePoint — because that is where you work. And a whole
+    lesson was <em>added</em> on handing a Skill to another person, because that turned out to be
+    the actual point and the first draft of this plan had missed it.
+  </div>
+
+  <!-- STAGE 1 -->
+  <section class="stage">
+    <div class="stage-head">
+      <span class="n">STAGE 01</span>
+      <h2>Skills — writing the process down</h2>
+      <span class="gate">Unlocked · Pro</span>
+    </div>
+    <p class="hint" style="margin:0 0 .9rem"><strong>Underlined titles are written and ready</strong> — the rest arrive as you get to them. A Skill is a master process in a plain text file. Claude picks it up on its own when it is relevant, and because it is just text, you can give it to someone.</p>
+
+    <div class="lesson" data-state="now">
+      <span class="dot">●</span><span class="lid">L01</span>
+      <div>
+        <div class="ltitle"><a href="../lessons/0001-your-first-skill.html">Your first Skill, by talking</a></div>
+        <div class="lwin">You describe a process out loud, Claude writes the file. No file editing at all. <b>Win: a Skill that fires without you naming it.</b></div>
+      </div>
+      <span class="mins">15 min</span>
+    </div>
+
+    <div class="lesson" data-state="ready">
+      <span class="dot">○</span><span class="lid">L02</span>
+      <div>
+        <div class="ltitle"><a href="../lessons/0002-why-it-didnt-fire.html">Why it didn't fire</a></div>
+        <div class="lwin">One field decides whether Claude ever reaches for your Skill. You'll break yours deliberately, then fix it. <b>Win: you can debug a silent Skill.</b></div>
+      </div>
+      <span class="mins">12 min</span>
+    </div>
+
+    <div class="lesson" data-state="todo">
+      <span class="dot">○</span><span class="lid">L03</span>
+      <div>
+        <div class="ltitle">Inside the file — and what really transfers</div>
+        <div class="lwin">Markdown and YAML, learned by reading the Skill <em>you</em> wrote. Also the straight answer on "all models": what carries across and what doesn't. <b>Win: the file stops looking like code.</b></div>
+      </div>
+      <span class="mins">15 min</span>
+    </div>
+
+    <div class="lesson" data-state="todo" data-recall>
+      <span class="dot">○</span><span class="lid">L04</span>
+      <div>
+        <div class="ltitle">Hand it to someone else</div>
+        <div class="lwin">The centre of this whole course. Give your Skill to a colleague, watch where they get different output, and fix the Skill rather than coaching the person. <b>Win: a process that works without you in the room.</b></div>
+      </div>
+      <span class="mins">15 min</span>
+    </div>
+  </section>
+
+  <!-- TRACK B — first instalment -->
+  <section class="stage">
+    <div class="stage-head">
+      <span class="n">TRACK B</span>
+      <h2>Usage &amp; context — the budget</h2>
+      <span class="gate">Do B1 any time</span>
+    </div>
+    <p class="hint" style="margin:0 0 .9rem">Pro runs two clocks at once. Almost nobody notices until one of them stops them mid-job.</p>
+
+    <div class="lesson" data-state="ready" data-track="B">
+      <span class="dot">○</span><span class="lid">B1</span>
+      <div>
+        <div class="ltitle"><a href="../lessons/0003-find-your-meter.html">Find your meter</a><span class="when">do this today</span></div>
+        <div class="lwin">Where the usage screen is, what the two clocks are, and a baseline reading taken <em>before</em> Cowork changes everything. Five minutes, and the "before" number only exists if you take it now. <b>Win: you know your own reset times.</b></div>
+      </div>
+      <span class="mins">8 min</span>
+    </div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section class="stage">
+    <div class="stage-head">
+      <span class="n">STAGE 02</span>
+      <h2>Reach — Claude touching your real work</h2>
+      <span class="gate off">Check: Microsoft tenant</span>
+    </div>
+    <p class="hint" style="margin:0 0 .9rem">A process that needs you to copy-paste the inputs isn't implemented yet. This stage removes the copy-pasting.</p>
+
+    <div class="lesson" data-state="todo">
+      <span class="dot">○</span><span class="lid">L05</span>
+      <div>
+        <div class="ltitle">Connect Microsoft 365, run one errand</div>
+        <div class="lwin">One connector, then a real errand across Outlook, Teams or SharePoint. <b>Win: Claude reads your actual work.</b>
+        <br><em>Caveat we'll test first:</em> the connector needs a Microsoft business tenant, and if yours is your employer's, their IT may have to allow it. The lesson has a no-connector fallback so you're never stuck.</div>
+      </div>
+      <span class="mins">15 min</span>
+    </div>
+
+    <div class="lesson" data-state="todo">
+      <span class="dot">○</span><span class="lid">L06</span>
+      <div>
+        <div class="ltitle">Where your files actually live</div>
+        <div class="lwin">You think in SharePoint sites and shared links. Cowork thinks in folders. This is the translation between the two — not a beginners' lesson, a genuinely confusing mismatch. <b>Win: you can point Claude at anything, first time.</b></div>
+      </div>
+      <span class="mins">12 min</span>
+    </div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section class="stage">
+    <div class="stage-head">
+      <span class="n">STAGE 03</span>
+      <h2>Cowork — the process running itself</h2>
+      <span class="gate">Unlocked · you can already see it</span>
+    </div>
+    <p class="hint" style="margin:0 0 .9rem">"Implemented where the code can work" — this is that stage. Cowork plans and executes multi-step jobs on real files instead of advising you.</p>
+
+    <div class="lesson" data-state="todo">
+      <span class="dot">○</span><span class="lid">L07</span>
+      <div>
+        <div class="ltitle">First run, in a folder that doesn't matter</div>
+        <div class="lwin">A small reversible job in a throwaway folder, so you meet permission prompts with nothing at stake. Covers Manual / Auto / Skip and what Cowork costs in usage. <b>Win: you've watched an agent work and chosen its leash.</b></div>
+      </div>
+      <span class="mins">15 min</span>
+    </div>
+
+    <div class="lesson" data-state="todo" data-track="B">
+      <span class="dot">○</span><span class="lid">B2</span>
+      <div>
+        <div class="ltitle">What that actually cost<span class="when">same day as L07</span></div>
+        <div class="lwin">Read the meter against a job you still remember, and see the gap between chat and agent work in your own numbers. Also what to do the day you <em>are</em> blocked. <b>Win: Cowork's price stops being a mystery.</b>
+        <br><em>Timing matters:</em> this only works while L07 is fresh. Don't leave it a week.</div>
+      </div>
+      <span class="mins">10 min</span>
+    </div>
+
+    <div class="lesson" data-state="todo" data-track="B" data-recall>
+      <span class="dot">○</span><span class="lid">B3</span>
+      <div>
+        <div class="ltitle">Making a task fit</div>
+        <div class="lwin">Why a long conversation costs more with every message, and the four levers that shrink a job: scope, fresh chats, Project caching, and — back to L01 — Skills. <b>Win: you can size a job to the clock.</b></div>
+      </div>
+      <span class="mins">12 min</span>
+    </div>
+
+    <div class="lesson" data-state="todo" data-recall>
+      <span class="dot">○</span><span class="lid">L08</span>
+      <div>
+        <div class="ltitle">Your real deliverable, handed over</div>
+        <div class="lwin">The recurring deck or spreadsheet, produced end-to-end by Cowork, steered by the Skills you wrote in Stage 01. <b>Win: the real thing, done without you.</b></div>
+      </div>
+      <span class="mins">15 min</span>
+    </div>
+
+    <div class="lesson" data-state="todo" data-recall>
+      <span class="dot">○</span><span class="lid">L09</span>
+      <div>
+        <div class="ltitle">Make it repeat — and give it away</div>
+        <div class="lwin">Put L08 on a schedule, then package the whole thing so a colleague can run it too. Closes the loop back to L04. <b>Win: a master process, transferred and implemented.</b></div>
+      </div>
+      <span class="mins">15 min</span>
+    </div>
+  </section>
+
+  <!-- STAGE 4 — PARKED -->
+  <section class="stage parked">
+    <div class="stage-head">
+      <span class="n">STAGE 04</span>
+      <h2>Claude Code — parked, on purpose</h2>
+      <span class="gate blocked">Not scheduled</span>
+    </div>
+    <p class="hint" style="margin:0 0 .9rem">Three more lessons exist here — the terminal, Skills living on your own machine, and subagents. They are deliberately <strong>not</strong> in your nine.</p>
+    <div class="panel">
+      <p><strong>Why parked.</strong> You were offered "comfortable in the terminal" as your goal and chose to write your own answer instead — so it isn't what you're after. At under thirty minutes a week it would cost roughly two months that Stages 01–03 will spend better. You've already typed a terminal command, so this is a scheduling call, not a judgement about difficulty.</p>
+      <p style="margin-top:.8rem"><strong>Say the word and it unlocks.</strong> The likely trigger: somewhere around L08 you'll want a process to run on files Cowork can't reach, or to run on a machine rather than in an app. That's the moment this stops being optional. Ask then.</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    <h3>Two things that will feel like detours</h3>
+    <p><strong>L04 and L09 make you go back.</strong> L04 sends you into a Skill you wrote three
+    weeks earlier; L09 returns to L04's handover problem. Both will feel like repetition and both
+    are the reason any of it is still with you in six months. Retrieving something you half
+    remember is what makes it stick — re-reading it does almost nothing. The lessons marked
+    <em>recall</em> above are where that happens on purpose.</p>
+
+    <h3 style="margin-top:1.4rem">One thing still missing</h3>
+    <p>You left the "task you'd most like to stop doing by hand" blank. No problem —
+    <strong>L01 asks you to pick one anyway</strong>, so whatever you choose there becomes the
+    thread through L08 and the finish. Just tell us what you picked.</p>
+
+    <h3 style="margin-top:1.4rem">Ready now</h3>
+    <p><a href="../lessons/0001-your-first-skill.html">L01 — Your first Skill, by talking</a> ·
+       <a href="../lessons/0002-why-it-didnt-fire.html">L02 — Why it didn't fire</a> ·
+       <a href="../lessons/0003-find-your-meter.html">B1 — Find your meter</a> ·
+       <a href="skill-anatomy.html">Skill anatomy card</a> (printable)</p>
+    <p class="hint" style="margin-top:.5rem"><strong>B1 is the one to do first</strong>, ahead of L02 even — it takes five minutes and the baseline reading it captures is gone once you start using Cowork.</p>
+
+    <div class="ask" style="margin-top:1.4rem">
+      <strong>Correct me.</strong> The whole plan above hangs off one sentence you wrote about master
+      processes being transferred and implemented. If that's not quite what you meant — or if the
+      order is wrong, or Claude Code matters more than I've assumed — say so now, while changing it
+      is cheap. Ask about anything here that doesn't land.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

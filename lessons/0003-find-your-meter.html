@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B1 — Find Your Meter</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/course.css">
+<style>
+  /* two-clock diagram — the whole concept in one glance */
+  .clocks { display:grid; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:var(--s3); }
+  .clock { background:var(--panel); padding:1rem 1.2rem; }
+  .clock h4 { font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--signal); margin:0 0 .5rem; }
+  .clock .big { font-family:var(--serif); font-size:1.5rem; font-weight:600; line-height:1.1; }
+  .clock p { font-size:.9rem; color:var(--muted); margin-top:.45rem; }
+  .drivers { display:grid; gap:0; border:1px solid var(--rule); margin-top:var(--s3); }
+  .driver { display:grid; grid-template-columns:2.2rem minmax(0,1fr); border-bottom:1px solid var(--rule-soft); }
+  .driver:last-child { border-bottom:0; }
+  .driver .rank { font-family:var(--mono); font-size:.72rem; font-weight:600; color:var(--signal); background:var(--panel-sunk); display:grid; place-items:center; border-right:1px solid var(--rule-soft); }
+  .driver .d { padding:.55rem .8rem; font-size:.94rem; }
+  .driver .d em { color:var(--muted); font-style:normal; display:block; font-size:.87rem; margin-top:.1rem; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <p class="eyebrow">Track B · Usage &amp; context · Lesson B1</p>
+    <h1>Find your meter</h1>
+    <p class="standfirst">Two clocks are running on your account right now, and you have almost certainly never looked at either. This takes five minutes, and it is the difference between planning around a limit and being ambushed by one.</p>
+    <div class="chips">
+      <span class="chip">~8 min</span>
+      <span class="chip">Do this today</span>
+      <span class="chip">Before you touch Cowork</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Read</b>one screen</div>
+    <div class="body">
+      <h2>What you're spending, and against what</h2>
+      <p>Everything you send and everything Claude sends back is measured in <strong>tokens</strong>. You will never count them and you do not need to. It is simply the unit the meter uses.</p>
+      <p>On Pro, two limits run at the same time — and people who get caught out are almost always watching the wrong one.<a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan"> ¹</a></p>
+
+      <div class="clocks">
+        <div class="clock">
+          <h4>Clock one · session</h4>
+          <div class="big">Resets every 5 hours</div>
+          <p>The one that stops you mid-job. Short, and it refills soon — being blocked here means waiting, not being out for the week.</p>
+        </div>
+        <div class="clock">
+          <h4>Clock two · weekly</h4>
+          <div class="big">Fixed day and time</div>
+          <p>Applies across all models, and resets at a time assigned to your account — the same slot every week, whenever you started. This is the one worth knowing by heart.</p>
+        </div>
+      </div>
+
+      <h2 style="margin-top:var(--s5)">What makes it run down faster</h2>
+      <p>Four things, in the order that will actually matter to you:<a href="https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work"> ²</a></p>
+
+      <div class="drivers">
+        <div class="driver"><span class="rank">1</span><div class="d">Which features you use<em>Cowork costs substantially more than chat — it is multi-step work running on your behalf, not one reply.<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork"> ³</a></em></div></div>
+        <div class="driver"><span class="rank">2</span><div class="d">How long the conversation already is<em>The surprising one. It gets a whole lesson of its own in B3.</em></div></div>
+        <div class="driver"><span class="rank">3</span><div class="d">How complex the work is</div></div>
+        <div class="driver"><span class="rank">4</span><div class="d">Which model, and the effort level set</div></div>
+      </div>
+
+      <div class="onramp">
+        <h3>token</h3>
+        <p style="margin-top:.4rem">The unit of text Claude reads and writes — very roughly three-quarters of a word. "Tokens" is just the meter's currency. Nobody counts them by hand; you read the percentage.</p>
+      </div>
+
+      <div class="warn">
+        <h3 style="color:var(--alarm)">One thing I will not tell you</h3>
+        <p>Anthropic's documentation does not say exactly <em>when</em> a five-hour session begins — whether it starts at your first message, and whether sessions overlap. I could give you a confident-sounding rule, but I would be guessing.</p>
+        <p style="margin-top:.6rem">So don't learn a rule. <strong>Read the countdown.</strong> Your usage screen shows the time left in the current session, which is the real answer and is always right.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Do</b>five minutes</div>
+    <div class="body">
+      <h2>Take a baseline</h2>
+
+      <div class="do">
+        <h3>Why today specifically</h3>
+        <p>You are about to start using Cowork, which will change these numbers dramatically. A "before" reading is only available <em>before</em> — take it next month and it tells you nothing. Five minutes now buys you a comparison you cannot reconstruct later.</p>
+      </div>
+
+      <ol class="steps" style="margin-top:1.6rem">
+        <li>
+          <div>
+            <h3>Open the usage screen</h3>
+            <p>In the desktop app: <code>Settings</code> → <code>Usage</code>.<a href="https://support.claude.com/en/articles/9797557-usage-limit-best-practices"> ⁴</a> If you have never opened this, that is the normal case — most people never do until something stops working.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Find the weekly reset</h3>
+            <p>Somewhere on that screen is the day and time your weekly allowance refills. <strong>This is the single most useful fact on the page.</strong> It is fixed — the same slot every week — so once you know it, you know it forever.</p>
+            <p class="hint">Practical version: if your reset is Tuesday morning, a big Cowork job on Monday night is the worst possible timing, and Tuesday afternoon is the best.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Record what you see</h3>
+            <p>Type the four numbers in below and save. It stays in this browser, and <strong>B2 shows it back to you</strong> next to your post-Cowork reading — which is the whole point.</p>
+            <div class="meter" data-label="Baseline — chat only, before Cowork"></div>
+            <p class="hint" style="margin-top:.8rem">Blanks are fine — record whatever your screen actually shows. Screens change; don't hunt for a field that isn't there.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Watch it move</h3>
+            <p>Go and have a normal chat with Claude — five or ten messages, whatever you were going to do anyway. Then come back to <code>Settings</code> → <code>Usage</code> and look again.</p>
+            <div class="ask" style="margin-top:.7rem">
+              <strong>The number to notice is how little it moved.</strong> Ordinary chat barely touches a Pro allowance. That is exactly why the jump when you first run Cowork is startling — and why you are taking this reading now rather than after.
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Recall</b>no scrolling up</div>
+    <div class="body">
+      <h2>Three from memory</h2>
+      <p class="aside" style="border:0;padding:0;margin-bottom:1.2rem">From memory. If you get one wrong, that's the one worth knowing — it costs nothing here and something real later.</p>
+
+      <div class="check">
+        <div class="q" data-answer="a">
+          <p>On Pro, which two clocks are running?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">A five-hour session and a week</button>
+            <button class="opt" data-k="b" type="button">A one-hour session and a day</button>
+            <button class="opt" data-k="c" type="button">A ten-hour session and a month</button>
+          </div>
+          <p class="why" hidden>A session limit resetting every five hours, and a weekly limit across all models resetting at a fixed time assigned to your account. Being stopped by the first means waiting a few hours; the second is the one worth planning around.</p>
+        </div>
+
+        <div class="q" data-answer="a">
+          <p>Which of these eats your allowance fastest?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Running a multi-step job in Cowork</button>
+            <button class="opt" data-k="b" type="button">Running a short question in normal chat</button>
+            <button class="opt" data-k="c" type="button">Running a saved Skill in normal chat</button>
+          </div>
+          <p class="why" hidden>Cowork, by a wide margin. It is agentic multi-step work executing on your behalf rather than a single reply, and Anthropic says plainly that it consumes more of your allocation than chatting. Worth knowing before your first run, not after.</p>
+        </div>
+
+        <div class="q" data-answer="a">
+          <p>Where does your weekly reset time live?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">In Settings, under Usage</button>
+            <button class="opt" data-k="b" type="button">In Settings, under Billing</button>
+            <button class="opt" data-k="c" type="button">In Settings, under Profile</button>
+          </div>
+          <p class="why" hidden>Settings → Usage — the same screen as the session countdown. Billing shows what you pay, which is a different question from what you have left.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <h3>Read one thing</h3>
+    <p><strong>Primary source:</strong>
+      <a href="https://support.claude.com/en/articles/9797557-usage-limit-best-practices">Usage limit best practices</a> — Claude Help Center.
+      Short, and every item is something you can actually do. One line in it is worth the visit
+      on its own: documents uploaded to a Project are cached, so re-referencing them costs you
+      almost nothing. We come back to that in B3.</p>
+
+    <h3 style="margin-top:1.4rem">Citations</h3>
+    <ul class="plain" style="font-size:.9rem">
+      <li>1 · <a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan">What is the Pro plan?</a> — five-hour session reset, weekly limit across all models, usage at Settings → Usage</li>
+      <li>2 · <a href="https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work">How do usage and length limits work?</a> — the four cost drivers</li>
+      <li>3 · <a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Get started with Claude Cowork</a> — Cowork consumes more allocation than chatting</li>
+      <li>4 · <a href="https://support.claude.com/en/articles/9797557-usage-limit-best-practices">Usage limit best practices</a> — where to check, and Project caching</li>
+    </ul>
+
+    <h3 style="margin-top:1.4rem">Next</h3>
+    <p><a href="0002-why-it-didnt-fire.html">← L02 — Why it didn't fire</a> · B2 — <em>What that actually cost</em> (arrives with your first Cowork run)</p>
+    <p style="margin-top:.5rem"><a href="../reference/journey-map.html">Journey map</a> · <a href="../reference/skill-anatomy.html">Skill anatomy card</a></p>
+
+    <div class="ask" style="margin-top:1.4rem">
+      <strong>Tell me your numbers.</strong> Send me what your usage screen said and I'll tell you
+      what it means for the size of Cowork job you can safely start. And if you have already been
+      blocked by a limit at some point — when, and what you were doing — that's the most useful
+      thing you could give me for writing B2.
+    </div>
+  </div>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script src="../assets/meter.js"></script>
+</body>
+</html>

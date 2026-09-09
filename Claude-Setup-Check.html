@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Claude Setup Check</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#15191f; --paper:#f2f4f6; --panel:#fff; --sunk:#e9ecf0;
+  --rule:#d3d8df; --rule-soft:#e4e8ed; --muted:#5c6673;
+  --signal:#b4690e; --signal-bg:#fdf4e6;
+  --ok:#1d6b4f; --ok-bg:#ebf5f0;
+  --serif:"IBM Plex Serif",Georgia,serif;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ink:#e6e9ed; --paper:#12161b; --panel:#1a1f26; --sunk:#0d1116;
+  --rule:#2c333c; --rule-soft:#222831; --muted:#9aa5b1;
+  --signal:#e8a33d; --signal-bg:#251c0c; --ok:#4ebe92; --ok-bg:#0f2018;
+}}
+:root[data-theme="dark"]{
+  --ink:#e6e9ed; --paper:#12161b; --panel:#1a1f26; --sunk:#0d1116;
+  --rule:#2c333c; --rule-soft:#222831; --muted:#9aa5b1;
+  --signal:#e8a33d; --signal-bg:#251c0c; --ok:#4ebe92; --ok-bg:#0f2018;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.6}
+.sheet{max-width:44rem;margin:0 auto;padding:2.4rem 1.4rem 10rem}
+
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);margin:0 0 .6rem}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.08;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.stand{color:var(--muted);margin:1rem 0 0;max-width:52ch;text-wrap:pretty}
+.masthead{border-bottom:2px solid var(--ink);padding-bottom:1.6rem;margin-bottom:1.2rem}
+.facts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.fact{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);padding:.28rem .55rem}
+
+.rule-note{border-left:4px solid var(--ok);background:var(--ok-bg);padding:.9rem 1.2rem;margin:1.6rem 0 0;font-size:.97rem}
+.rule-note b{color:var(--ok)}
+
+.q{background:var(--panel);border:1px solid var(--rule);padding:1.2rem 1.4rem;margin-top:1.6rem}
+.q.done{border-left:4px solid var(--ok);padding-left:calc(1.4rem - 3px)}
+.qhead{display:flex;gap:.8rem;align-items:baseline;margin-bottom:.9rem}
+.qnum{font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--signal);flex:none;padding-top:.15rem}
+.qtext{font-weight:600;margin:0;font-size:1.04rem;text-wrap:pretty}
+.hint{color:var(--muted);font-size:.93rem;margin:.35rem 0 0;text-wrap:pretty}
+.hint code{font-family:var(--mono);font-size:.86em;background:var(--sunk);border:1px solid var(--rule-soft);border-radius:3px;padding:.08em .32em}
+.multi-tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);padding:.15rem .4rem;flex:none}
+
+.opts{display:grid;gap:.5rem}
+.opt{font:inherit;font-size:.97rem;text-align:left;background:var(--sunk);color:var(--ink);border:1px solid var(--rule);padding:.62rem .85rem;cursor:pointer;display:flex;gap:.65rem;align-items:baseline;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--signal)}
+.opt .box{font-family:var(--mono);font-size:.8rem;color:var(--muted);flex:none;width:1.1rem}
+.opt.on{border-color:var(--ok);background:var(--ok-bg);font-weight:500}
+.opt.on .box{color:var(--ok);font-weight:600}
+.opt .lab,.rung .lab{flex:1;min-width:0}
+.opt small{display:block;color:var(--muted);font-weight:400;font-size:.86rem;margin-top:.12rem}
+.opt.on small{color:var(--muted)}
+
+.otherwrap{border:1px dashed var(--rule);background:transparent;padding:.5rem .75rem;display:flex;gap:.65rem;align-items:baseline}
+.otherwrap:focus-within{border-color:var(--signal);border-style:solid}
+.otherwrap.on{border-style:solid;border-color:var(--ok);background:var(--ok-bg)}
+.otherwrap .box{font-family:var(--mono);font-size:.8rem;color:var(--muted);flex:none;width:1.1rem}
+.otherwrap.on .box{color:var(--ok);font-weight:600}
+.otherwrap input{font:inherit;font-size:.95rem;flex:1;min-width:0;background:transparent;color:var(--ink);border:0;padding:0}
+.otherwrap input:focus{outline:none}
+.otherwrap input::placeholder{color:var(--muted);opacity:.85}
+textarea{font:inherit;font-size:.97rem;width:100%;background:var(--sunk);color:var(--ink);border:1px solid var(--rule);padding:.7rem .85rem;resize:vertical;min-height:5.2rem;font-family:var(--sans)}
+textarea:focus{outline:2px solid var(--signal);outline-offset:1px}
+
+.subq{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:1.1rem 0 .5rem}
+
+/* ladder — checkbox grid, deliberately fast to fill */
+.ladder{display:grid;gap:.4rem}
+.rung{font:inherit;font-size:.95rem;text-align:left;background:transparent;color:var(--ink);border:1px solid var(--rule-soft);padding:.5rem .75rem;cursor:pointer;display:flex;gap:.65rem;align-items:baseline}
+.rung:hover{border-color:var(--signal)}
+.rung .box{font-family:var(--mono);font-size:.82rem;color:var(--muted);flex:none;width:1.1rem}
+.rung.on{background:var(--ok-bg);border-color:var(--ok)}
+.rung.on .box{color:var(--ok);font-weight:600}
+.rung em{color:var(--muted);font-style:normal;font-size:.87rem}
+
+/* result */
+.result{margin-top:2.4rem;border:1px solid var(--rule);background:var(--panel);padding:1.2rem 1.4rem}
+.result h2{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:0 0 .5rem;letter-spacing:-.01em}
+pre#out{font-family:var(--mono);font-size:.78rem;line-height:1.55;background:var(--sunk);border:1px solid var(--rule);padding:.9rem;margin:1rem 0 0;overflow-x:auto;white-space:pre;max-height:22rem;overflow-y:auto}
+.btnrow{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem;align-items:center}
+button.act{font:inherit;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;background:var(--ink);color:var(--paper);border:1px solid var(--ink);padding:.62rem 1.1rem;cursor:pointer}
+button.act:hover{background:var(--signal);border-color:var(--signal);color:#fff}
+button.ghost{background:transparent;color:var(--muted);border-color:var(--rule)}
+button.ghost:hover{background:transparent;color:var(--signal);border-color:var(--signal)}
+.said{font-family:var(--mono);font-size:.75rem;color:var(--ok);font-weight:600}
+.said[hidden]{display:none!important}
+
+/* sticky progress */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--rule);padding:.7rem 1.4rem;display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;z-index:5}
+.bar .count{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.bar .count b{color:var(--ink);font-weight:600}
+.track{flex:1;min-width:8rem;height:5px;background:var(--sunk);border:1px solid var(--rule-soft)}
+.fill{height:100%;width:0;background:var(--signal);transition:width .25s}
+:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+@media (max-width:34rem){.sheet{padding:1.6rem 1rem 11rem}.bar{padding:.6rem 1rem}}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <p class="eyebrow">Before we start</p>
+    <h1>Nine questions, then we build you a course</h1>
+    <p class="stand">Arjun asked me to put together a hands-on course that gets you past chat and into Skills, Cowork and Claude Code. To pitch it at the right level I need to know what you actually have installed and what you have actually touched.</p>
+    <div class="facts">
+      <span class="fact">~4 minutes</span>
+      <span class="fact">Mostly clicking</span>
+      <span class="fact">Saves as you go</span>
+    </div>
+    <div class="rule-note">
+      <b>One rule:</b> "never heard of it" is the single most useful answer you can give me. Every honest <em>no</em> here removes something confusing from your course. Guessing upward just gets you lessons that skip the part you needed.
+      <br><br>And if none of the options describe you, don't force one — every question has an
+      <strong>open line at the bottom</strong>. Typing there counts as answering it.
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <section class="q" data-other="Something else — a trial, through a university, not sure how to check…" data-key="plan" data-type="single">
+    <div class="qhead"><span class="qnum">01</span><p class="qtext">Which Claude plan are you on?</p></div>
+    <p class="hint">Check at <code>claude.ai</code> → your initials, bottom left → <code>Settings</code> → <code>Billing</code>. This one matters: it decides whether Cowork is available to you at all.</p>
+    <div class="opts">
+      <button class="opt" data-val="Free">Free</button>
+      <button class="opt" data-val="Pro">Pro</button>
+      <button class="opt" data-val="Max">Max</button>
+      <button class="opt" data-val="Team or Enterprise">Team or Enterprise <small>through work</small></button>
+      <button class="opt" data-val="Don't know">Don't know / couldn't find it</button>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="q" data-other="Somewhere else — in Slack, a browser extension, inside another app…" data-key="surfaces" data-type="multi">
+    <div class="qhead"><span class="qnum">02</span><p class="qtext">Where do you actually use Claude?</p><span class="multi-tag">pick any</span></div>
+    <div class="opts">
+      <button class="opt" data-val="Browser">In a browser tab at claude.ai</button>
+      <button class="opt" data-val="Desktop app">The Claude desktop app <small>a real app in your dock or taskbar, not a browser tab</small></button>
+      <button class="opt" data-val="Phone">Phone app</button>
+      <button class="opt" data-val="Claude Code">Claude Code <small>the one you type commands into</small></button>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="q" data-other="Describe what you actually see instead…" data-key="cowork" data-type="single">
+    <div class="qhead"><span class="qnum">03</span><p class="qtext">Open Claude and look at the box where you type. Do you see a <em>Cowork</em> option?</p></div>
+    <p class="hint">Look for a small toggle, tab or button labelled <strong>Cowork</strong> near the send button. Please actually look rather than guessing — this is the fastest way for me to know what to plan.</p>
+    <div class="opts">
+      <button class="opt" data-val="Yes, I see Cowork">Yes, it's there</button>
+      <button class="opt" data-val="No Cowork option">No, nothing like that</button>
+      <button class="opt" data-val="Already used Cowork">It's there and I've already used it</button>
+      <button class="opt" data-val="Couldn't tell">Looked, couldn't tell</button>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="q" data-other="Describe where you're really at with them…" data-key="skills" data-type="single">
+    <div class="qhead"><span class="qnum">04</span><p class="qtext">Skills — where are you with them?</p></div>
+    <p class="hint">They live at <code>Settings</code> → <code>Customize</code> → <code>Skills</code>. Worth opening that page now even if the answer is "never seen it".</p>
+    <div class="opts">
+      <button class="opt" data-val="Never heard of Skills">Never heard of them until Arjun said the word</button>
+      <button class="opt" data-val="Heard of them, never looked">Heard of them, never opened that page</button>
+      <button class="opt" data-val="Found the page, nothing on">Found the page, haven't turned anything on</button>
+      <button class="opt" data-val="Use built-in skills">I've used the built-in ones <small>Excel, Word, PowerPoint, PDF</small></button>
+      <button class="opt" data-val="Made a custom skill">I've made one of my own</button>
+    </div>
+  </section>
+
+  <!-- 5 — the calibration ladder -->
+  <section class="q" data-other="Anything else vaguely technical you've done that isn't listed…" data-key="ladder" data-type="multi">
+    <div class="qhead"><span class="qnum">05</span><p class="qtext">Tick anything you've genuinely done before</p><span class="multi-tag">pick any</span></div>
+    <p class="hint">This is the important one. It sets how much I explain versus how much I assume, so under-ticking costs you nothing and over-ticking costs you a confusing lesson. Leaving most of these blank is completely normal and expected.</p>
+    <div class="ladder">
+      <button class="rung" data-val="Renamed/moved files in Finder or Explorer">Renamed or moved files in Finder / File Explorer</button>
+      <button class="rung" data-val="Can read a file path">Could tell me where a file lives if asked <em>— e.g. Documents / Reports / Q3.xlsx</em></button>
+      <button class="rung" data-val="Edited a .txt or .md file">Opened and edited a plain text file <em>— .txt or .md, not Word</em></button>
+      <button class="rung" data-val="Written a spreadsheet formula">Written a spreadsheet formula <em>— VLOOKUP, SUMIF, anything</em></button>
+      <button class="rung" data-val="Seen Markdown">Seen Markdown before <em>— writing <code>**bold**</code> with asterisks</em></button>
+      <button class="rung" data-val="Opened Terminal">Opened Terminal or Command Prompt <em>— even once, even by accident</em></button>
+      <button class="rung" data-val="Typed a command in Terminal">Typed a command into it and pressed enter</button>
+      <button class="rung" data-val="Heard of YAML">Heard the word YAML</button>
+      <button class="rung" data-val="Used git or GitHub">Used git or GitHub</button>
+      <button class="rung" data-val="Written a script">Written a script or bit of code <em>— any language</em></button>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="q" data-other="Another app you live in…" data-key="apps" data-type="multi">
+    <div class="qhead"><span class="qnum">06</span><p class="qtext">Which of these do you live in during a normal week?</p><span class="multi-tag">pick any</span></div>
+    <p class="hint">Claude can connect to several of these directly. Knowing which ones tells me what to wire up in the connectors lesson.</p>
+    <div class="opts">
+      <button class="opt" data-val="Gmail">Gmail</button>
+      <button class="opt" data-val="Outlook / Microsoft 365">Outlook / Microsoft 365</button>
+      <button class="opt" data-val="Google Drive / Docs / Sheets">Google Drive, Docs or Sheets</button>
+      <button class="opt" data-val="OneDrive / SharePoint">OneDrive / SharePoint</button>
+      <button class="opt" data-val="Excel">Excel <small>desktop files</small></button>
+      <button class="opt" data-val="Slack">Slack</button>
+      <button class="opt" data-val="Teams">Microsoft Teams</button>
+      <button class="opt" data-val="Notion">Notion</button>
+      <button class="opt" data-val="Jira / Linear / Monday / Asana">Jira, Linear, Monday or Asana</button>
+      <button class="opt" data-val="PowerPoint / Slides">PowerPoint or Google Slides</button>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="q" data-key="task" data-type="text">
+    <div class="qhead"><span class="qnum">07</span><p class="qtext">What's the one repetitive task you'd most like to stop doing by hand?</p></div>
+    <p class="hint">Two or three lines is plenty. Be boringly specific — "every Monday I pull numbers out of four spreadsheets and rewrite the same status summary" beats "reporting". Whatever you put here becomes the thing we actually build across the whole course, so pick something real and slightly annoying.</p>
+    <textarea data-key="task" placeholder="Every week I have to…"></textarea>
+  </section>
+
+  <!-- 8 -->
+  <section class="q" data-other="The win that would actually matter to you…" data-key="win" data-type="single">
+    <div class="qhead"><span class="qnum">08</span><p class="qtext">Six weeks from now, which of these would feel like the biggest win?</p></div>
+    <div class="opts">
+      <button class="opt" data-val="Stop re-explaining context">Never re-explaining my context and format again</button>
+      <button class="opt" data-val="Hand off multi-step jobs">Handing over a whole multi-step job and walking away</button>
+      <button class="opt" data-val="Stop copy-pasting between apps">Claude reaching my actual files and apps, so I stop copy-pasting</button>
+      <button class="opt" data-val="Comfortable in the terminal">Being able to use the terminal without feeling out of my depth</button>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="q" data-other="However your weeks actually work…" data-key="time" data-type="single">
+    <div class="qhead"><span class="qnum">09</span><p class="qtext">Realistically, how much time per week?</p></div>
+    <p class="hint">Answer with the number you'll actually hit on a bad week, not a good one. I'd rather build six small lessons you finish than three big ones you don't.</p>
+    <div class="opts">
+      <button class="opt" data-val="Under 30 min/week">Under 30 minutes</button>
+      <button class="opt" data-val="30-60 min/week">30 to 60 minutes</button>
+      <button class="opt" data-val="1-2 h/week">One to two hours</button>
+      <button class="opt" data-val="2h+/week">More than two hours</button>
+    </div>
+  </section>
+
+  <section class="q" data-key="tried" data-type="text">
+    <div class="qhead"><span class="qnum">+</span><p class="qtext">Optional: anything you've already tried that went badly?</p></div>
+    <p class="hint">A Skill that never fired, Cowork doing something alarming, a command that errored. Failures are the most useful thing you can hand me — they point straight at the lesson you need.</p>
+    <textarea data-key="tried" placeholder="Optional — leave blank if nothing comes to mind"></textarea>
+  </section>
+
+  <!-- result -->
+  <div class="result">
+    <h2>Send this back to Arjun</h2>
+    <p class="hint" style="margin-top:0">This fills in as you answer. When you're done, hit copy and paste it to him — WhatsApp, email, wherever. Nothing is sent automatically from this page.</p>
+    <pre id="out">Nothing answered yet.</pre>
+    <div class="btnrow">
+      <button class="act" id="copy">Copy answers</button>
+      <button class="act ghost" id="reset">Start over</button>
+      <span class="said" id="said" hidden>Copied.</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="bar">
+  <span class="count"><b id="n">0</b> of 9 answered</span>
+  <span class="track"><span class="fill" id="fill"></span></span>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var KEY = "claude-intake-v1";
+  var LABELS = {
+    plan:     "Plan",
+    surfaces: "Uses Claude via",
+    cowork:   "Cowork visible?",
+    skills:   "Skills experience",
+    ladder:   "Has done before",
+    apps:     "Lives in",
+    task:     "Task to automate",
+    win:      "Biggest win",
+    time:     "Time per week",
+    tried:    "Tried and failed"
+  };
+  var ORDER = ["plan","surfaces","cowork","skills","ladder","apps","task","win","time","tried"];
+  var COUNTED = ["plan","surfaces","cowork","skills","ladder","apps","task","win","time"];
+
+  var state = {};
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) state = JSON.parse(raw) || {};
+  } catch (e) { state = {}; }
+  if (typeof state !== "object" || state === null) state = {};
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var sections = Array.prototype.slice.call(document.querySelectorAll(".q"));
+
+  // Choice buttons ship as plain text; give each one an indicator slot and a
+  // label track so a <small> sublabel stacks under its label instead of
+  // becoming a sibling flex item.
+  var choices = document.querySelectorAll(".opt, .rung");
+  for (var c = 0; c < choices.length; c++) {
+    var btn = choices[c];
+    var multi = btn.closest(".q").getAttribute("data-type") === "multi";
+    var lab = document.createElement("span");
+    lab.className = "lab";
+    while (btn.firstChild) lab.appendChild(btn.firstChild);
+    var box = document.createElement("span");
+    box.className = "box";
+    box.setAttribute("aria-hidden", "true");
+    box.textContent = multi ? "[ ]" : "( )";
+    btn.appendChild(box);
+    btn.appendChild(lab);
+    btn.setAttribute("type", "button");
+    btn.setAttribute("aria-pressed", "false");
+  }
+
+  // Every closed question gets an escape hatch. A list of options that doesn't
+  // describe him must never be a dead end, so an "other" line sits in each
+  // group and its text counts as a real answer.
+  for (var o = 0; o < sections.length; o++) {
+    var osec = sections[o];
+    var ph = osec.getAttribute("data-other");
+    if (!ph) continue;
+    var isMulti = osec.getAttribute("data-type") === "multi";
+    var wrap = document.createElement("label");
+    wrap.className = "otherwrap";
+    var obox = document.createElement("span");
+    obox.className = "box";
+    obox.setAttribute("aria-hidden", "true");
+    obox.textContent = isMulti ? "[ ]" : "( )";
+    var oinp = document.createElement("input");
+    oinp.type = "text";
+    oinp.placeholder = ph;
+    oinp.setAttribute("aria-label", "Other \u2014 your own words");
+    wrap.appendChild(obox);
+    wrap.appendChild(oinp);
+    (osec.querySelector(".opts") || osec.querySelector(".ladder")).appendChild(wrap);
+  }
+
+  var TYPES = {};
+  for (var t = 0; t < sections.length; t++) {
+    TYPES[sections[t].getAttribute("data-key")] = sections[t].getAttribute("data-type");
+  }
+
+
+  function otherOf(key) {
+    var v = state[key + "__other"];
+    return (typeof v === "string" && v.trim()) ? v.trim() : "";
+  }
+
+  function answered(key) {
+    if (otherOf(key)) return true;
+    var v = state[key];
+    if (v == null) return false;
+    if (Array.isArray(v)) return v.length > 0;
+    return String(v).trim().length > 0;
+  }
+
+  function paintSection(sec) {
+    var key = sec.getAttribute("data-key");
+    var type = sec.getAttribute("data-type");
+    var v = state[key];
+
+    if (type === "text") {
+      var ta = sec.querySelector("textarea");
+      if (ta && ta.value !== (v || "")) ta.value = v || "";
+    } else {
+      var btns = sec.querySelectorAll(".opt, .rung");
+      for (var i = 0; i < btns.length; i++) {
+        var b = btns[i];
+        var val = b.getAttribute("data-val");
+        var on = type === "multi"
+          ? (Array.isArray(v) && v.indexOf(val) > -1)
+          : (v === val);
+        b.classList.toggle("on", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+        var box = b.querySelector(".box");
+        if (box) box.textContent = on ? (type === "multi" ? "[x]" : "(o)") : (type === "multi" ? "[ ]" : "( )");
+      }
+    }
+    var ow = sec.querySelector(".otherwrap");
+    if (ow) {
+      var oin = ow.querySelector("input");
+      var ov = state[key + "__other"] || "";
+      if (oin.value !== ov) oin.value = ov;
+      var oon = ov.trim().length > 0;
+      ow.classList.toggle("on", oon);
+      ow.querySelector(".box").textContent =
+        oon ? (type === "multi" ? "[x]" : "(o)") : (type === "multi" ? "[ ]" : "( )");
+    }
+
+    sec.classList.toggle("done", answered(key));
+  }
+
+  function render() {
+    var lines = [];
+    lines.push("CLAUDE COURSE — INTAKE ANSWERS");
+    lines.push("==============================");
+    lines.push("");
+
+    for (var i = 0; i < ORDER.length; i++) {
+      var key = ORDER[i];
+      if (!answered(key)) continue;
+      var v = state[key];
+      var ov = otherOf(key);
+      var label = LABELS[key];
+      var type = TYPES[key];
+
+      if (type === "text") {
+        lines.push(label + ":");
+        var para = String(v || "").trim().split(/\n+/);
+        for (var k = 0; k < para.length; k++) lines.push("  " + para[k]);
+      } else if (type === "multi") {
+        lines.push(label + ":");
+        var arr = Array.isArray(v) ? v : [];
+        for (var j = 0; j < arr.length; j++) lines.push("  - " + arr[j]);
+        if (ov) lines.push("  - [his words] " + ov);
+      } else {
+        lines.push(label + ": " + (ov ? ov + "   [his words]" : v));
+      }
+      lines.push("");
+    }
+
+    var done = 0;
+    for (var m = 0; m < COUNTED.length; m++) if (answered(COUNTED[m])) done++;
+
+    var missing = [];
+    for (var p = 0; p < COUNTED.length; p++) if (!answered(COUNTED[p])) missing.push(LABELS[COUNTED[p]]);
+    if (missing.length) {
+      lines.push("Not answered: " + missing.join(", "));
+      lines.push("");
+    }
+
+    var out = document.getElementById("out");
+    out.textContent = done === 0 ? "Nothing answered yet." : lines.join("\n").replace(/\n{3,}/g, "\n\n");
+
+    document.getElementById("n").textContent = String(done);
+    document.getElementById("fill").style.width = (done / COUNTED.length * 100) + "%";
+    document.getElementById("said").hidden = true;
+  }
+
+  function repaint() {
+    for (var i = 0; i < sections.length; i++) paintSection(sections[i]);
+    render();
+  }
+
+  // wire choices
+  for (var s = 0; s < sections.length; s++) {
+    (function (sec) {
+      var key = sec.getAttribute("data-key");
+      var type = sec.getAttribute("data-type");
+
+      if (type === "text") {
+        var ta = sec.querySelector("textarea");
+        if (ta) {
+          ta.addEventListener("input", function () {
+            state[key] = ta.value;
+            save();
+            sec.classList.toggle("done", answered(key));
+            render();
+          });
+        }
+        return;
+      }
+
+      var ow = sec.querySelector(".otherwrap");
+      if (ow) {
+        (function (oin) {
+          oin.addEventListener("input", function () {
+            state[key + "__other"] = oin.value;
+            // a typed answer wins over a clicked one on single-choice
+            if (type === "single" && oin.value.trim()) state[key] = null;
+            save();
+            paintSection(sec);
+            render();
+          });
+        })(ow.querySelector("input"));
+      }
+
+      var btns = sec.querySelectorAll(".opt, .rung");
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+          var val = this.getAttribute("data-val");
+          if (type === "multi") {
+            var arr = Array.isArray(state[key]) ? state[key].slice() : [];
+            var at = arr.indexOf(val);
+            if (at > -1) arr.splice(at, 1); else arr.push(val);
+            state[key] = arr;
+          } else {
+            state[key] = (state[key] === val) ? null : val;
+            if (state[key]) state[key + "__other"] = "";
+          }
+          save();
+          paintSection(sec);
+          render();
+        });
+      }
+    })(sections[s]);
+  }
+
+  document.getElementById("copy").addEventListener("click", function () {
+    var text = document.getElementById("out").textContent;
+    var said = document.getElementById("said");
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      if (ok) { said.textContent = "Copied."; said.hidden = false; }
+      else {
+        said.textContent = "Couldn't copy — select the text above and copy it manually.";
+        said.hidden = false;
+      }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        said.textContent = "Copied.";
+        said.hidden = false;
+      }, fallback);
+    } else fallback();
+  });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    state = {};
+    save();
+    repaint();
+  });
+
+  repaint();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill Anatomy Card</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/course.css">
+<style>
+  .card { border:1px solid var(--rule); background:var(--panel); padding:1.2rem 1.4rem; margin-top:var(--s3); }
+  .card > h3 { font-family:var(--mono); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--signal); margin-bottom:.7rem; }
+  .anno { display:grid; grid-template-columns:minmax(0,1fr); gap:0; border:1px solid var(--rule); margin-top:var(--s3); }
+  .anno > div { display:grid; grid-template-columns:8.5rem minmax(0,1fr); border-bottom:1px solid var(--rule-soft); }
+  .anno > div:last-child { border-bottom:0; }
+  .anno dt { font-family:var(--mono); font-size:.72rem; color:var(--signal); background:var(--panel-sunk); padding:.6rem .7rem; font-weight:600; border-right:1px solid var(--rule-soft); }
+  .anno dd { margin:0; padding:.6rem .8rem; font-size:.93rem; background:var(--panel); }
+  .anno dd em { color:var(--muted); font-style:normal; display:block; font-size:.87rem; margin-top:.15rem; }
+  .flag { display:grid; grid-template-columns:1.6rem minmax(0,1fr); gap:.6rem; padding:.5rem 0; border-bottom:1px solid var(--rule-soft); font-size:.94rem; align-items:baseline; }
+  .flag:last-child { border-bottom:0; }
+  .flag .m { font-family:var(--mono); font-weight:600; text-align:center; }
+  .flag.no .m { color:var(--alarm); }
+  .flag.ok .m { color:var(--verified); }
+  @media print { .sheet { padding-top:0 } }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <p class="eyebrow">Reference card · Print me</p>
+    <h1>What a Skill is made of</h1>
+    <p class="standfirst">Everything from L01 and L02, compressed. Come back to this rather than re-reading the lessons.</p>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Shape</b>the file</div>
+    <div class="body">
+      <p>A Skill is one plain-text file called <code>SKILL.md</code>, optionally in a folder with extra files beside it. Nothing is compiled and nothing runs — it is a written process.</p>
+      <pre><code>---
+name: client-status-decks
+description: Formats weekly client status decks in the
+  house structure. Use when the user mentions a client
+  deck, a status deck, a weekly update slide, or asks to
+  build or restructure a PowerPoint for a client.
+---
+
+# Client status decks
+
+## Structure
+1. Cover — client name, week ending
+2. Traffic light — green / amber / red, one line each
+...</code></pre>
+
+      <dl class="anno">
+        <div><dt>--- ---</dt><dd>The fenced block at the top is <strong>frontmatter</strong><em>Settings about the file, kept separate from the content. The format is called YAML.</em></dd></div>
+        <div><dt>name</dt><dd>Lowercase letters, numbers and hyphens only. Max 64 characters.<em>Cannot contain the words "claude" or "anthropic".</em></dd></div>
+        <div><dt>description</dt><dd><strong>The trigger.</strong> Max 1,024 characters. Third person.<em>The only part Claude reads before choosing. Gets both halves or it fails.</em></dd></div>
+        <div><dt>body</dt><dd>Your actual process, in Markdown. Under 500 lines.<em>Never opened unless the description won.</em></dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Formula</b>the trigger</div>
+    <div class="body">
+      <div class="card">
+        <h3>The description formula</h3>
+        <pre><code>[What it does, third person.] Use when [the words
+you would really type], [a synonym], [a synonym],
+or [the file type / the thing it touches].</code></pre>
+        <p class="hint" style="margin-top:.7rem">Listing the same request three or four ways is the mechanism, not padding. Include your colleagues' words too, not only yours.</p>
+      </div>
+
+      <div class="card">
+        <h3>Fails vs fires</h3>
+        <div class="flag no"><span class="m">✗</span><div><code>Helps with documents</code> — matches nothing anyone types</div></div>
+        <div class="flag no"><span class="m">✗</span><div><code>I can help you format decks</code> — first person</div></div>
+        <div class="flag no"><span class="m">✗</span><div><code>You can use this for decks</code> — second person</div></div>
+        <div class="flag no"><span class="m">✗</span><div>What it does, with no <em>"Use when"</em> half at all</div></div>
+        <div class="flag ok"><span class="m">✓</span><div>Third person, both halves, real phrasings listed</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Debug</b>gone silent</div>
+    <div class="body">
+      <div class="card">
+        <h3>Skill isn't firing — in order</h3>
+        <ol class="steps">
+          <li><div><p>Is it <strong>switched on</strong>? <code>Settings</code> → <code>Customize</code> → <code>Skills</code>.</p></div></li>
+          <li><div><p>Does the description have a <strong>"Use when"</strong> half?</p></div></li>
+          <li><div><p>Does it contain the <strong>exact words you typed</strong>? Not synonyms — the literal words.</p></div></li>
+          <li><div><p>Is it <strong>third person</strong>? No "I" or "you".</p></div></li>
+          <li><div><p>Still stuck: paste the description into Claude and ask why it wouldn't trigger for your request.</p></div></li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3>Three levels of loading</h3>
+        <p style="font-size:.94rem">Worth knowing, because it explains why having many Skills is free.</p>
+        <dl class="anno" style="margin-top:.7rem">
+          <div><dt>always</dt><dd><code>name</code> + <code>description</code> of every Skill you have</dd></div>
+          <div><dt>when chosen</dt><dd>the body of <code>SKILL.md</code></dd></div>
+          <div><dt>if needed</dt><dd>extra files bundled next to it</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <p><strong>Sources.</strong>
+      <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices">Skill authoring best practices</a> ·
+      <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Agent Skills overview</a> ·
+      <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">Equipping agents for the real world</a> — all Anthropic.</p>
+    <p style="margin-top:.8rem"><a href="../lessons/0001-your-first-skill.html">L01</a> · <a href="../lessons/0002-why-it-didnt-fire.html">L02</a> · <a href="journey-map.html">Journey map</a></p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L01 — Your First Skill, By Talking</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <p class="eyebrow">Stage 01 · Skills · Lesson 01</p>
+    <h1>Your first Skill, by talking</h1>
+    <p class="standfirst">You will not open a file in this lesson. You are going to describe something you already know how to do, and end up with a Skill that Claude reaches for on its own.</p>
+    <div class="chips">
+      <span class="chip">~15 min</span>
+      <span class="chip">Pro — you're set</span>
+      <span class="chip">No files, no terminal</span>
+    </div>
+  </div>
+
+  <!-- KNOWLEDGE — deliberately short. This is the whole reading budget. -->
+  <div class="row">
+    <div class="mark"><b>Read</b>one screen</div>
+    <div class="body">
+      <h2>The whole idea, in four sentences</h2>
+      <p>You are already good at chat. The cost of being good at chat is that you re-supply the same context every time — your format, your rules, the four steps you always take.</p>
+      <p>A <strong>Skill</strong> is that context, written down once, that Claude loads by itself when it becomes relevant. Anthropic's own framing is the useful one: <em>"Building a skill for an agent is like putting together an onboarding guide for a new hire."</em><a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"> ¹</a></p>
+      <p>The part that makes it cheap: Claude does not read your Skills. It reads only their <em>names and descriptions</em> — and opens the full instructions only for the one that matches what you just asked for.<a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview"> ²</a> Twenty Skills cost you almost nothing until one of them is needed.</p>
+
+      <div class="onramp">
+        <h3>description field</h3>
+        <p style="margin-top:.4rem">Every Skill carries a one-line summary of <em>what it does and when to use it</em>. That line is the only thing Claude sees when choosing. It is the whole game, and it is why the next lesson exists.</p>
+      </div>
+
+      <div class="aside">
+        You do not need to know what a file, a folder, YAML or Markdown is to finish this lesson.
+        Claude writes all of that for you today. You will meet those words in <strong>L03</strong>,
+        by reading the file you are about to create — which is a much gentler introduction than
+        being taught them cold.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRACTICE -->
+  <div class="row">
+    <div class="mark"><b>Do</b>hands on keys</div>
+    <div class="body">
+      <h2>Build one</h2>
+
+      <div class="do">
+        <h3>Step 1 · Pick the task</h3>
+        <p>Something you have done <strong>more than twice this month</strong>, that has rules living only in your head. From your world: the way you structure a client deck, how you clean an Excel sheet before it goes out, the shape of your Teams status update, how you turn meeting notes into an Outlook summary.</p>
+        <p style="margin-top:.6rem"><strong>Do not</strong> pick something ambitious. Pick something small and slightly boring. Small and boring is the correct difficulty for a first Skill.</p>
+      </div>
+
+      <ol class="steps" style="margin-top:1.6rem">
+        <li>
+          <div>
+            <h3>Start a normal chat</h3>
+            <p>Open the desktop app. New conversation, normal chat — not Cowork yet.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Paste this, filled in</h3>
+            <p>Replace the bracket with your task. Then send it.</p>
+            <pre><code>I want to create a Skill that captures how I do [YOUR TASK].
+
+Interview me about it first — ask me one question at a time
+about my steps, my format, and the rules I apply without
+thinking. Don't write the Skill until you've asked at least
+five questions and I've said we're done.</code></pre>
+            <p class="hint">The interview is the point. It drags out the rules you don't know you have — which are exactly the rules worth writing down.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Answer honestly, including the messy bits</h3>
+            <p>"It depends" is a real answer — say what it depends on. Those conditions are the most valuable thing in the finished Skill.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Ask for the Skill</h3>
+            <p>When the questions stop being useful, say:</p>
+            <pre><code>Good, that's everything. Now create the Skill.</code></pre>
+            <p>Claude knows this format natively — it will produce a properly structured Skill without you specifying anything about how one is built.<a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices"> ³</a></p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Install it</h3>
+            <p>Go to <code>Settings</code> → <code>Customize</code> → <code>Skills</code>, then use <code>+</code> to add the one Claude just made.<a href="https://support.claude.com/en/articles/12512198-how-to-create-custom-skills"> ⁴</a></p>
+            <p style="margin-top:.5rem">Claude may offer to hand you the file directly instead — either route is fine. If you get stuck here, ask; this screen has moved before.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>The real test</h3>
+            <p>Open a <strong>brand new conversation</strong> and ask for the task the way you normally would — <strong>without mentioning the Skill, and without naming it</strong>.</p>
+            <div class="ask" style="margin-top:.7rem">
+              <strong>That is the whole exercise.</strong> A Skill you have to summon by name has saved
+              you nothing — and more importantly, it can't be handed to a colleague who doesn't
+              know its name. The win is Claude reaching for it unprompted. Watch for a line in its
+              response saying a Skill was used.
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="ask" style="margin-top:1.6rem">
+        <strong>Tell us which task you picked.</strong> You left that question blank in the setup
+        check, and whatever you choose here becomes the thread running through L08 and the finish
+        line — the thing Cowork eventually produces without you. One line is enough.
+      </div>
+
+      <div class="warn" style="margin-top:1.6rem">
+        <h3 style="color:var(--alarm)">If it didn't fire</h3>
+        <p>Good — genuinely. That is the most common outcome and it is the entire subject of
+        <a href="0002-why-it-didnt-fire.html"><strong>L02</strong></a>. Don't fix it yet, and don't rewrite it. Bring it to the next lesson as-is;
+        a broken example you made yourself is worth more than a working one I hand you.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RETRIEVAL -->
+  <div class="row">
+    <div class="mark"><b>Recall</b>no scrolling up</div>
+    <div class="body">
+      <h2>Three from memory</h2>
+      <p class="aside" style="border:0;padding:0;margin-bottom:1.2rem">Answer before you scroll back. Getting one wrong from memory teaches you more than getting three right by re-reading — that discomfort is the mechanism, not a sign you failed.</p>
+
+      <div class="check">
+        <div class="q" data-answer="a">
+          <p>Before Claude picks a Skill, what has it actually loaded?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Only the name and description fields</button>
+            <button class="opt" data-k="b" type="button">Only the steps inside the instructions</button>
+            <button class="opt" data-k="c" type="button">Only the files bundled alongside it</button>
+          </div>
+          <p class="why" hidden>Names and descriptions only. Everything else stays unread until that Skill is chosen — which is why having many Skills costs you almost nothing, and why the description carries all the weight.</p>
+        </div>
+
+        <div class="q" data-answer="a">
+          <p>Where do you manage custom Skills in the Claude app?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Under Settings, then Customize, then Skills</button>
+            <button class="opt" data-k="b" type="button">Under Settings, then Billing, then Plans</button>
+            <button class="opt" data-k="c" type="button">Under Profile, then Projects, then Files</button>
+          </div>
+          <p class="why" hidden>Settings → Customize → Skills. Worth remembering, because it's also where you go to check whether a Skill is switched on at all — a surprisingly common reason one seems broken.</p>
+        </div>
+
+        <div class="q" data-answer="a">
+          <p>Which mental model fits a Skill best?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">An onboarding guide for a newcomer</button>
+            <button class="opt" data-k="b" type="button">A single prompt saved for reuse</button>
+            <button class="opt" data-k="c" type="button">A program that runs on schedule</button>
+          </div>
+          <p class="why" hidden>An onboarding guide. The difference from a saved prompt matters: a saved prompt waits for you to fetch it, while a Skill is picked up on its own when the situation calls for it — and it can carry extra files, the way a real onboarding pack has appendices.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <h3>Read or watch one thing</h3>
+    <p><strong>Primary source:</strong>
+      <a href="https://academy.claude.com/tutorials/how-to-create-a-skill-with-claude-through-conversation">How to create a skill with Claude through conversation</a>
+      — Claude Academy, Anthropic's own education team. Free, and it shows this exact lesson done
+      on screen. If any step above felt underspecified, watch that instead of re-reading this.</p>
+
+    <h3 style="margin-top:1.4rem">Citations</h3>
+    <ul class="plain" style="font-size:.9rem">
+      <li>1 · <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">Equipping agents for the real world with Agent Skills</a> — Anthropic Engineering</li>
+      <li>2 · <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Agent Skills overview</a> — the three-level loading model</li>
+      <li>3 · <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices">Skill authoring best practices</a> — "Claude models understand the Skill format and structure natively"</li>
+      <li>4 · <a href="https://support.claude.com/en/articles/12512198-how-to-create-custom-skills">How to create custom skills</a> — Claude Help Center</li>
+    </ul>
+
+    <h3 style="margin-top:1.4rem">Next</h3>
+    <p><a href="0002-why-it-didnt-fire.html">L02 — Why it didn't fire →</a></p>
+    <p style="margin-top:.5rem"><a href="0003-find-your-meter.html">B1 — Find your meter</a> — five minutes, worth doing before you go near Cowork · <a href="../reference/skill-anatomy.html">Skill anatomy card</a> · <a href="../reference/journey-map.html">Journey map</a></p>
+
+    <div class="ask" style="margin-top:1.4rem">
+      <strong>Ask me things.</strong> I'm your teacher for this, not just the person who made the page.
+      If a step didn't work, if a word landed wrong, if your Skill fired but did the wrong thing, or
+      if you want to argue that this whole approach is overkill for your job — bring it. Especially
+      bring the failures; they're what sets the next lesson.
+    </div>
+  </div>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

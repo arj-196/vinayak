@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L02 — Why It Didn't Fire</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/course.css">
+<style>
+  /* side-by-side good/bad comparison — the whole point of this lesson */
+  .versus { display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:var(--s3); }
+  .versus > div { background:var(--panel); padding:.9rem 1.1rem; }
+  .versus h4 { font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; margin:0 0 .5rem; }
+  .versus .no h4 { color:var(--alarm); }
+  .versus .yes h4 { color:var(--verified); }
+  .versus code { display:block; background:var(--panel-sunk); border:1px solid var(--rule-soft); border-radius:0; padding:.55rem .65rem; font-size:.78rem; line-height:1.5; }
+  .versus p { font-size:.9rem; color:var(--muted); margin-top:.6rem; }
+  .formula { font-family:var(--mono); font-size:.82rem; background:var(--signal-bg); border:1px solid var(--signal); padding:.8rem 1rem; margin-top:var(--s3); }
+  .formula b { color:var(--signal); }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <p class="eyebrow">Stage 01 · Skills · Lesson 02</p>
+    <h1>Why it didn't fire</h1>
+    <p class="standfirst">If your Skill from L01 sat there doing nothing, one field is almost certainly why. You're going to break yours on purpose, watch it fail, then fix it — because a Skill you can repair is worth more than one that happened to work.</p>
+    <div class="chips">
+      <span class="chip">~12 min</span>
+      <span class="chip">Needs your L01 Skill</span>
+      <span class="chip">No files, no terminal</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Read</b>one screen</div>
+    <div class="body">
+      <h2>Claude is choosing blind</h2>
+      <p>Remember from <a href="0001-your-first-skill.html">L01</a>: Claude does not read your Skills when deciding. It sees only their names and one-line <strong>descriptions</strong>, and opens the full instructions for whichever description matches what you just asked.<a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices"> ¹</a></p>
+      <p>So the description is not a summary for humans. It is the <em>trigger</em>. Beautiful instructions behind a vague description are unreachable — which is exactly what happened if yours stayed silent.</p>
+
+      <div class="formula">
+        A description needs two halves: <b>what it does</b> + <b>when to use it</b>.<br>
+        Miss the second half and it will not fire.
+      </div>
+
+      <div class="versus">
+        <div class="no">
+          <h4>Won't fire</h4>
+          <code>description: Helps with documents</code>
+          <p>Anthropic's own example of what not to write. Nothing here matches anything you'd actually type.<a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices"> ¹</a></p>
+        </div>
+        <div class="yes">
+          <h4>Will fire</h4>
+          <code>description: Analyze Excel spreadsheets, create pivot tables, generate charts. Use when analyzing Excel files, spreadsheets, tabular data, or .xlsx files.</code>
+          <p>Says what it does, then names the words a person would really use — including the file extension.</p>
+        </div>
+      </div>
+
+      <div class="onramp">
+        <h3>third person</h3>
+        <p style="margin-top:.4rem">Write <em>"Formats client decks…"</em>, never <em>"I can help you format decks…"</em> or <em>"You can use this to…"</em>. The description gets injected into Claude's own instructions, and a mixed point of view measurably hurts discovery.<a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices"> ¹</a> This is the single most common mistake after vagueness.</p>
+      </div>
+
+      <div class="aside">
+        There is a second, duller reason a Skill goes silent: it is switched off. Before you debug
+        anything, check <code>Settings</code> → <code>Customize</code> → <code>Skills</code> and
+        confirm yours is actually enabled.
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Do</b>break it first</div>
+    <div class="body">
+      <h2>Break it, then fix it</h2>
+
+      <div class="do">
+        <h3>Why break something that works</h3>
+        <p>Because you'll meet this failure again in six months, on a Skill you didn't write, with no memory of this lesson. Watching the failure happen on purpose — while you know the cause — is what makes it recognisable later. Skip this and you'll only have read about it.</p>
+      </div>
+
+      <ol class="steps" style="margin-top:1.6rem">
+        <li>
+          <div>
+            <h3>Look at your description</h3>
+            <p>Open your L01 Skill and find its description. Read it against one question: <strong>does it contain the words I'd actually type when I want this?</strong></p>
+            <p class="hint">If your Skill is about client decks but the description says "assists with presentation preparation", the mismatch is right there. You'd type "deck", it says "presentation preparation".</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Break it deliberately</h3>
+            <p>Change the description to exactly this, and save:</p>
+            <pre><code>Helps with documents</code></pre>
+            <p>Now open a new conversation and ask for your task the normal way. It should be ignored. <strong>Confirm the failure</strong> — that's the point of the step.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Rebuild it with the formula</h3>
+            <p>Write it in two halves. Sentence one, what it does. Sentence two, starting with "Use when", naming the words you actually say — <em>and paste in the real phrasing you used in step 2's test</em>.</p>
+            <pre><code>Formats weekly client status decks in the house
+structure. Use when the user mentions a client deck,
+a status deck, a weekly update slide, or asks to
+build or restructure a PowerPoint for a client.</code></pre>
+            <p class="hint">Notice it lists four ways of asking for the same thing. That redundancy is not clutter — it's the whole mechanism.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Test in a new conversation</h3>
+            <p>New chat, ask naturally, don't name the Skill. If it fires, you've just done the full debug loop yourself.</p>
+            <div class="ask" style="margin-top:.7rem">
+              <strong>Still silent?</strong> Ask Claude directly: <em>"I have a Skill with this
+              description. Why wouldn't it trigger when I ask for a client deck?"</em> Paste both.
+              Claude can read its own selection logic and will usually tell you exactly what's
+              missing — that's a debugging move worth keeping.
+            </div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>One extra sentence, for later</h3>
+            <p>Add the words a <em>colleague</em> would use, not just yours. If you say "deck" and your team says "the weekly pack", put both in. You'll need this in L04, when someone else runs your Skill and it ignores them.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Recall</b>no scrolling up</div>
+    <div class="body">
+      <h2>Three from memory</h2>
+      <p class="aside" style="border:0;padding:0;margin-bottom:1.2rem">From memory, before you scroll. One of these deliberately tests something you might have skimmed.</p>
+
+      <div class="check">
+        <div class="q" data-answer="a">
+          <p>What must a description contain to work at all?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">What it does and when to use it</button>
+            <button class="opt" data-k="b" type="button">What it does and how it was built</button>
+            <button class="opt" data-k="c" type="button">What it does and who approved it</button>
+          </div>
+          <p class="why" hidden>Both halves. "What it does" alone is the classic silent Skill — Claude has no way to tell whether your request is an occasion for it. "Use when…" is the half people forget.</p>
+        </div>
+
+        <div class="q" data-answer="a">
+          <p>Which point of view should a description use?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Third person, describing what it does</button>
+            <button class="opt" data-k="b" type="button">First person, describing what I do</button>
+            <button class="opt" data-k="c" type="button">Second person, describing what you do</button>
+          </div>
+          <p class="why" hidden>Third person. The description is injected into Claude's own instructions, so "I can help you…" and "You can use this to…" both read as noise from the wrong speaker and hurt discovery.</p>
+        </div>
+
+        <div class="q" data-answer="a">
+          <p>Your Skill ignores the exact phrase you always type. Best fix?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Add those exact words to the description</button>
+            <button class="opt" data-k="b" type="button">Add those exact words to the instructions</button>
+            <button class="opt" data-k="c" type="button">Add those exact words to the filename</button>
+          </div>
+          <p class="why" hidden>The description — that's the only part Claude reads before choosing. Adding them to the instructions changes nothing, because the instructions are never opened unless the description won first. This distinction is the whole lesson.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <h3>Read one thing</h3>
+    <p><strong>Primary source:</strong>
+      <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices#writing-effective-descriptions">Skill authoring best practices — "Writing effective descriptions"</a>,
+      Anthropic's platform docs. <strong>Read that one section only</strong> — the full page is long and
+      aimed at developers. It carries three worked description examples you can copy the shape of.</p>
+
+    <h3 style="margin-top:1.4rem">Citations</h3>
+    <ul class="plain" style="font-size:.9rem">
+      <li>1 · <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices">Skill authoring best practices</a> — third-person rule, the good/bad description examples, and "the description is critical for skill selection"</li>
+    </ul>
+
+    <h3 style="margin-top:1.4rem">Next</h3>
+    <p><a href="0001-your-first-skill.html">← L01</a> · L03 — <em>Inside the file, and what really transfers</em> (not written yet)</p>
+    <p style="margin-top:.5rem"><a href="0003-find-your-meter.html">B1 — Find your meter</a> (5 min, do it today) · <a href="../reference/skill-anatomy.html">Skill anatomy card</a> — everything above, compressed · <a href="../reference/journey-map.html">Journey map</a></p>
+
+    <div class="ask" style="margin-top:1.4rem">
+      <strong>Bring me the description that didn't work.</strong> Paste it and I'll tell you which
+      half was missing — and if you think this whole description business is a design flaw rather
+      than something to work around, say that too. It's a fair argument and worth having.
+    </div>
+  </div>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
