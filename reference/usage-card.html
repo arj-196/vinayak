@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usage Card</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/course.css">
+<style>
+  .card { border:1px solid var(--rule); background:var(--panel); padding:1.1rem 1.3rem; margin-top:var(--s3); }
+  .card > h3 { font-family:var(--mono); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--signal); margin-bottom:.7rem; }
+  .two { display:grid; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:var(--s3); }
+  .two > div { background:var(--panel); padding:.9rem 1.1rem; }
+  .two h4 { font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; margin:0 0 .4rem; }
+  .two .big { font-family:var(--serif); font-size:1.2rem; font-weight:600; line-height:1.15; }
+  .two p { font-size:.89rem; color:var(--muted); margin-top:.4rem; }
+  .two .mild h4 { color:var(--verified); } .two .harsh h4 { color:var(--alarm); }
+  .lv { display:grid; grid-template-columns:2rem minmax(0,1fr); border-bottom:1px solid var(--rule-soft); }
+  .lv:last-child { border-bottom:0; }
+  .lv .t { font-family:var(--mono); font-size:.78rem; font-weight:600; color:var(--signal); background:var(--panel-sunk); display:grid; place-items:center; border-right:1px solid var(--rule-soft); }
+  .lv .b { padding:.5rem .8rem; font-size:.93rem; }
+  .lv .b em { display:block; color:var(--muted); font-style:normal; font-size:.86rem; margin-top:.1rem; }
+  @media print { .sheet { padding-top:0 } }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <p class="eyebrow">Reference card · Print me</p>
+    <h1>Usage, limits and making things fit</h1>
+    <p class="standfirst">Track B compressed. Come back to this instead of re-reading B1, B2 and B3.</p>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Clocks</b>two of them</div>
+    <div class="body">
+      <div class="two">
+        <div class="mild">
+          <h4>Session · the mild one</h4>
+          <div class="big">Resets every 5 hours</div>
+          <p>Stops you mid-day. Wait it out, or drop to ordinary chat, which costs a fraction of Cowork. Countdown is on the usage screen.</p>
+        </div>
+        <div class="harsh">
+          <h4>Weekly · the awkward one</h4>
+          <div class="big">Fixed day and time</div>
+          <p>Across all models, refilling only at the slot assigned to your account. Nothing speeds it up — spread big runs out instead of stacking them.</p>
+        </div>
+      </div>
+      <p class="hint" style="margin-top:var(--s3)">Both live at <code>Settings</code> → <code>Usage</code>, with the next reset time. The docs never state exactly when a session <em>starts</em> — read the countdown rather than trusting a remembered rule.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Cost</b>what drives it</div>
+    <div class="body">
+      <div class="card">
+        <h3>In the order that will bite you</h3>
+        <div class="lv"><span class="t">1</span><div class="b">Which feature<em>Cowork ≫ chat. Agentic multi-step work, not one reply.</em></div></div>
+        <div class="lv"><span class="t">2</span><div class="b">How long the conversation already is<em>The whole history is re-sent every message. Near the window, Claude also summarises to keep going — and that costs too.</em></div></div>
+        <div class="lv"><span class="t">3</span><div class="b">How complex the work is</div></div>
+        <div class="lv"><span class="t">4</span><div class="b">Which model, and the effort level</div></div>
+      </div>
+
+      <div class="card">
+        <h3>Context window</h3>
+        <p style="font-size:.94rem">Up to 1M tokens on the newest paid plans, 500K or 200K otherwise, with part always reserved for the reply. A chat that starts feeling vague has compressed its own early detail — that is the signal to start fresh.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Levers</b>pick one</div>
+    <div class="body">
+      <div class="card">
+        <h3>Four ways to make a job fit</h3>
+        <div class="lv"><span class="t">A</span><div class="b">Split the job into smaller runs<em>When it died partway through.</em></div></div>
+        <div class="lv"><span class="t">B</span><div class="b">Start a fresh conversation<em>When the chat is long and has drifted. Free, instant, most under-used.</em></div></div>
+        <div class="lv"><span class="t">C</span><div class="b">Put the document into a Project<em>When it's a <strong>thing</strong> you keep returning to. Cached — re-referencing costs almost nothing.</em></div></div>
+        <div class="lv"><span class="t">D</span><div class="b">Capture the process as a Skill<em>When it's a <strong>way of doing things</strong> you keep re-explaining. Unread until its description matches.</em></div></div>
+        <div class="lv"><span class="t">+</span><div class="b">Batch related questions into one message</div></div>
+      </div>
+      <div class="do" style="margin-top:var(--s3)">
+        <h3>The one that gets confused</h3>
+        <p><strong>C is for a thing. D is for a way of doing things.</strong> A policy PDF you quote → Project. The five rules you apply to every deck → Skill.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Blocked</b>what now</div>
+    <div class="body">
+      <div class="card">
+        <h3>In order</h3>
+        <ol class="steps">
+          <li><div><p>Which clock stopped you? <strong>Session</strong> means hours; <strong>weekly</strong> means plan differently.</p></div></li>
+          <li><div><p>Session-blocked and still need something? Ordinary <strong>chat</strong> costs a fraction of Cowork.</p></div></li>
+          <li><div><p>Genuinely can't wait? <strong>Usage credits</strong> continue at standard API rates within a cap you set — the escape hatch, not the strategy.</p></div></li>
+          <li><div><p>Happening often? The job is too big for how you're running it. Go to the four levers.</p></div></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Before any long run</h3>
+        <p style="font-size:.94rem">Check the time left in the current session. Starting a forty-minute job with twenty minutes left is the most avoidable way to lose work.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <p><strong>Sources.</strong>
+      <a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan">What is the Pro plan?</a> ·
+      <a href="https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work">How usage and length limits work</a> ·
+      <a href="https://support.claude.com/en/articles/9797557-usage-limit-best-practices">Usage limit best practices</a> ·
+      <a href="https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans">Manage usage credits</a> — all Claude Help Center.</p>
+    <p style="margin-top:.8rem"><a href="../lessons/0003-find-your-meter.html">B1</a> · <a href="../lessons/0004-what-that-cost.html">B2</a> · <a href="../lessons/0005-making-a-task-fit.html">B3</a> · <a href="journey-map.html">Journey map</a></p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -39,3 +39,19 @@ introducing a new idea. Genuine interleaving, not manufactured.
 actually begins or whether sessions roll. Do not fill that gap with a plausible-sounding rule.
 B1 teaches reading the live countdown in Settings → Usage instead — more accurate, and a better
 habit than a memorised mechanic.
+
+## Track B written in full, 2026-09-09
+
+B1–B3 now exist, plus [reference/usage-card.html](../reference/usage-card.html).
+
+Two design notes worth keeping. **B2 is deliberately inverted** — practice before explanation —
+because the meter reading is only comparable while the Cowork run is the last significant thing
+he did; reading it a week later measures everything since. **B3's drill reuses the same four
+lever options across all five scenarios**, which gives perfect answer-length parity for free and
+turns the exercise into classification rather than recall of wording. The discriminating pair is
+scenario 2 against scenario 3: a *document* you return to is a Project, a *process* you
+re-explain is a Skill. That distinction is the one thing in Track B most likely to be got wrong
+in the wild.
+
+`assets/budget.js` was built rather than a worked example on the page, because the useful output
+— which clock binds first — depends on his own two numbers and flips direction depending on them.

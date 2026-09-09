@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B3 — Making a Task Fit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/course.css">
+<style>
+  .levers { display:grid; gap:0; border:1px solid var(--rule); margin-top:var(--s3); }
+  .lever { display:grid; grid-template-columns:2.4rem minmax(0,1fr); border-bottom:1px solid var(--rule-soft); }
+  .lever:last-child { border-bottom:0; }
+  .lever .tag { font-family:var(--mono); font-size:.8rem; font-weight:600; color:var(--signal); background:var(--panel-sunk); display:grid; place-items:center; border-right:1px solid var(--rule-soft); }
+  .lever .l { padding:.7rem .9rem; }
+  .lever h4 { margin:0 0 .2rem; font-size:.98rem; }
+  .lever p { font-size:.91rem; color:var(--muted); }
+  .growth { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:var(--s3); font-variant-numeric:tabular-nums; }
+  .growth > div { background:var(--panel); padding:.8rem .9rem; text-align:center; }
+  .growth dt { font-family:var(--mono); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+  .growth dd { margin:.25rem 0 0; font-family:var(--serif); font-size:1.45rem; font-weight:600; line-height:1; }
+  .growth dd small { display:block; font-family:var(--sans); font-size:.78rem; font-weight:400; color:var(--muted); margin-top:.25rem; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <p class="eyebrow">Track B · Usage &amp; context · Lesson B3</p>
+    <h1>Making a task fit</h1>
+    <p class="standfirst">B2 told you how many runs you get. This is how to need fewer of them — four levers, and knowing which one a given problem calls for. One of them you have already built.</p>
+    <div class="chips">
+      <span class="chip">~12 min</span>
+      <span class="chip">Calls back to L01</span>
+      <span class="chip">Chat and Cowork</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Read</b>one screen</div>
+    <div class="body">
+      <h2>Why a long chat gets expensive</h2>
+      <p>A conversation has no memory of its own. Every time you send a message, the <em>whole conversation so far</em> goes along with it — so message fifty costs far more than message five, even if you typed the same words.</p>
+      <p>The space it all has to fit in is the <strong>context window</strong>: up to a million tokens on the newest paid plans, 500,000 or 200,000 on others, with part of it always held back for Claude's reply.<a href="https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work"> ¹</a></p>
+
+      <div class="growth">
+        <div><dt>Message 5</dt><dd>cheap<small>little history to carry</small></dd></div>
+        <div><dt>Message 50</dt><dd>dearer<small>all of it re-sent</small></dd></div>
+        <div><dt>Near the limit</dt><dd>dearest<small>summarising, on top</small></dd></div>
+      </div>
+
+      <p style="margin-top:var(--s3)">That third column is the one that catches people. As a conversation nears the window, Claude summarises the earlier messages so it can keep going — and Anthropic states it plainly: <em>"Longer conversations that trigger automatic context management consume more of your usage limit."</em><a href="https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work"> ¹</a> The tidying itself costs you.</p>
+
+      <div class="aside">
+        This is also why a very long conversation starts feeling vaguer. It is not getting tired —
+        earlier detail has been compressed into a summary, and summaries lose things. If a chat
+        feels like it is forgetting, that is your signal, not your imagination.
+      </div>
+
+      <h2 style="margin-top:var(--s5)">The four levers</h2>
+
+      <div class="levers">
+        <div class="lever"><span class="tag">A</span><div class="l">
+          <h4>Split the job into smaller runs</h4>
+          <p>Three jobs that each finish beat one that dies two-thirds through. Applies whenever the failure was <em>ran out partway</em>.</p>
+        </div></div>
+        <div class="lever"><span class="tag">B</span><div class="l">
+          <h4>Start a fresh conversation</h4>
+          <p>Free, instant, and the most under-used. The moment the topic changes, the old history is pure cost. Applies when a chat is <em>long and has drifted</em>.</p>
+        </div></div>
+        <div class="lever"><span class="tag">C</span><div class="l">
+          <h4>Put the document into a Project</h4>
+          <p>Files uploaded to a Project are cached: <em>"Every time you reference that content, only new/uncached portions count against your limits."</em><a href="https://support.claude.com/en/articles/9797557-usage-limit-best-practices"> ²</a> Applies to a <em>document</em> you keep coming back to.</p>
+        </div></div>
+        <div class="lever"><span class="tag">D</span><div class="l">
+          <h4>Capture the process as a Skill</h4>
+          <p>You already know this one. A Skill sits unread until its description matches — so instructions you would otherwise paste every single time cost almost nothing until the moment they are needed.<a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview"> ³</a> Applies to a <em>process</em> you keep re-explaining.</p>
+        </div></div>
+      </div>
+
+      <div class="do" style="margin-top:var(--s4)">
+        <h3>The distinction worth getting right</h3>
+        <p><strong>C is for a thing. D is for a way of doing things.</strong> A 40-page policy PDF you keep quoting is a document — Project. The five formatting rules you apply to every deck are a process — Skill. Reach for the wrong one and you will be pasting something into every chat again by next month.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Drill</b>pick the lever</div>
+    <div class="body">
+      <h2>Five situations</h2>
+      <p class="aside" style="border:0;padding:0;margin-bottom:1.2rem">Same four options every time, so nothing is given away by the shape of the answer. Decide before you click — a wrong guess here is cheap and teaches more than a careful re-read.</p>
+
+      <div class="check">
+        <div class="q" data-answer="b">
+          <p>You've been in one chat for two hours and it's now about something else entirely.</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Split the job into smaller runs</button>
+            <button class="opt" data-k="b" type="button">Start a fresh conversation right now</button>
+            <button class="opt" data-k="c" type="button">Put the document into a Project</button>
+            <button class="opt" data-k="d" type="button">Capture the process as a Skill</button>
+          </div>
+          <p class="why" hidden><strong>B.</strong> Two hours of unrelated history is re-sent with every message and buys you nothing. Free to fix, takes one second, and almost nobody does it.</p>
+        </div>
+
+        <div class="q" data-answer="d">
+          <p>You paste the same brand guidelines into every deck request.</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Split the job into smaller runs</button>
+            <button class="opt" data-k="b" type="button">Start a fresh conversation right now</button>
+            <button class="opt" data-k="c" type="button">Put the document into a Project</button>
+            <button class="opt" data-k="d" type="button">Capture the process as a Skill</button>
+          </div>
+          <p class="why" hidden><strong>D.</strong> Guidelines you apply are a process, not a reference document — and a Skill fires on its own, so you stop remembering to paste them. If they were a long PDF you occasionally quote, C would be right instead.</p>
+        </div>
+
+        <div class="q" data-answer="c">
+          <p>You keep quoting the same 40-page policy PDF across many separate chats.</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Split the job into smaller runs</button>
+            <button class="opt" data-k="b" type="button">Start a fresh conversation right now</button>
+            <button class="opt" data-k="c" type="button">Put the document into a Project</button>
+            <button class="opt" data-k="d" type="button">Capture the process as a Skill</button>
+          </div>
+          <p class="why" hidden><strong>C.</strong> A document you return to, so Project caching is exactly the mechanism — after the first upload, referencing it costs almost nothing. Re-uploading it into fresh chats is the expensive version of the same habit.</p>
+        </div>
+
+        <div class="q" data-answer="a">
+          <p>A Cowork run died two-thirds of the way through when the session ran out.</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Split the job into smaller runs</button>
+            <button class="opt" data-k="b" type="button">Start a fresh conversation right now</button>
+            <button class="opt" data-k="c" type="button">Put the document into a Project</button>
+            <button class="opt" data-k="d" type="button">Capture the process as a Skill</button>
+          </div>
+          <p class="why" hidden><strong>A.</strong> The job is simply bigger than one session. Three runs that each finish and save their output beat one heroic run that loses everything — and this is what your B2 numbers are for: you know roughly how big a run you can afford.</p>
+        </div>
+
+        <div class="q" data-answer="d">
+          <p>Every single time, you re-explain the same five formatting rules.</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Split the job into smaller runs</button>
+            <button class="opt" data-k="b" type="button">Start a fresh conversation right now</button>
+            <button class="opt" data-k="c" type="button">Put the document into a Project</button>
+            <button class="opt" data-k="d" type="button">Capture the process as a Skill</button>
+          </div>
+          <p class="why" hidden><strong>D.</strong> "Every single time" is the tell for a Skill, every time. This is the same instinct as <a href="0001-your-first-skill.html">L01</a> — and it is worth noticing that the thing you built to save yourself re-explaining is also the thing that saves you tokens. Same mechanism, two payoffs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Do</b>one real fix</div>
+    <div class="body">
+      <div class="do">
+        <h3>Apply one lever, today</h3>
+        <p>Pick the job from <a href="0004-what-that-cost.html">B2</a> — the one you now know the price of — and choose the single lever most likely to shrink it. Then actually do it: start the Project, split the run, write the Skill.</p>
+        <p style="margin-top:.6rem">One lever, not four. The point is to find out whether the next run costs measurably less, and you can only learn that if you changed one thing.</p>
+      </div>
+
+      <div class="ask" style="margin-top:var(--s3)">
+        <strong>Then measure it.</strong> Run the job again and put the new numbers into
+        <a href="0004-what-that-cost.html">B2's calculator</a>. If the runs-per-week figure went up,
+        you have just proved the lever works on <em>your</em> work rather than in principle — which
+        is the only proof worth having.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <h3>Read one thing</h3>
+    <p><strong>Primary source:</strong>
+      <a href="https://support.claude.com/en/articles/9797557-usage-limit-best-practices">Usage limit best practices</a>
+      — Claude Help Center. Short, and it adds one lever this lesson left out: batching related
+      questions into a single message instead of firing them off one at a time.</p>
+
+    <h3 style="margin-top:1.4rem">Citations</h3>
+    <ul class="plain" style="font-size:.9rem">
+      <li>1 · <a href="https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work">How do usage and length limits work?</a> — context window sizes, and long conversations triggering automatic context management</li>
+      <li>2 · <a href="https://support.claude.com/en/articles/9797557-usage-limit-best-practices">Usage limit best practices</a> — Project caching, batching</li>
+      <li>3 · <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Agent Skills overview</a> — the three-level loading model behind lever D</li>
+    </ul>
+
+    <h3 style="margin-top:1.4rem">Next</h3>
+    <p><a href="0004-what-that-cost.html">← B2 — What that actually cost</a> · Track B complete · back to the main path at <em>L08</em></p>
+    <p style="margin-top:.5rem"><a href="../reference/usage-card.html">Usage card</a> — all three Track B lessons on one printable page · <a href="../reference/journey-map.html">Journey map</a></p>
+
+    <div class="ask" style="margin-top:1.4rem">
+      <strong>Argue with the drill.</strong> If you thought one of those five had a different right
+      answer, tell me which — several of them are genuinely arguable, and the reasoning matters more
+      than the letter. And if you tried a lever and it made no difference, that's worth knowing:
+      it usually means the cost is somewhere I haven't looked yet.
+    </div>
+  </div>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

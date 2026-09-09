@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B2 — What That Actually Cost</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/course.css">
+<style>
+  .blocked { display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:var(--s3); }
+  .blocked > div { background:var(--panel); padding:1rem 1.2rem; }
+  .blocked h4 { font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; margin:0 0 .5rem; }
+  .blocked .mild h4 { color:var(--verified); }
+  .blocked .harsh h4 { color:var(--alarm); }
+  .blocked .big { font-family:var(--serif); font-size:1.25rem; font-weight:600; line-height:1.15; }
+  .blocked p { font-size:.91rem; color:var(--muted); margin-top:.45rem; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <p class="eyebrow">Track B · Usage &amp; context · Lesson B2</p>
+    <h1>What that actually cost</h1>
+    <p class="standfirst">You have just watched Cowork do a job for you. Before the memory fades, go and look at what it spent — because the number only means something while you can still picture the work it bought.</p>
+    <div class="chips">
+      <span class="chip">~10 min</span>
+      <span class="chip">Same day as L07</span>
+      <span class="chip">Needs your B1 baseline</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Do</b>while it's fresh</div>
+    <div class="body">
+      <div class="warn">
+        <h3 style="color:var(--alarm)">Do this part first, read second</h3>
+        <p>This lesson is inverted on purpose. Go and read your meter <em>now</em>, before the explanation — the numbers are only comparable while the Cowork run is the last significant thing you did. Leave it a week and the reading is contaminated by everything since.</p>
+      </div>
+
+      <ol class="steps" style="margin-top:1.6rem">
+        <li>
+          <div>
+            <h3>Read the meter again</h3>
+            <p><code>Settings</code> → <code>Usage</code>. Same screen as <a href="0003-find-your-meter.html">B1</a>.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Save it beside your baseline</h3>
+            <p>Your B1 reading should already be showing below. Add today's.</p>
+            <div class="meter" data-label="After first Cowork run"></div>
+            <p class="hint" style="margin-top:.8rem">If the table shows only one row, your baseline was saved in a different browser — no problem, just carry on with today's number.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Count</b>your own rate</div>
+    <div class="body">
+      <h2>How many of those do you get?</h2>
+      <p>This is the question that actually matters, and it needs subtraction and division that nobody does in their head. Put in the four numbers and let it work them out.</p>
+
+      <div class="panel" style="margin-top:var(--s3)">
+        <div class="budget-calc"></div>
+      </div>
+
+      <div class="aside" style="margin-top:var(--s3)">
+        <strong>The line to pay attention to is which clock binds first.</strong> Most people assume
+        the weekly limit is the one to fear, because it sounds bigger. For heavy Cowork use it is
+        usually the five-hour session that stops you — and that is much better news, because
+        waiting a few hours is a coffee break rather than a lost week.
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Read</b>one screen</div>
+    <div class="body">
+      <h2>The day you're actually blocked</h2>
+      <p>Being stopped by one clock is a completely different situation from being stopped by the other, and the right response is different too.</p>
+
+      <div class="blocked">
+        <div class="mild">
+          <h4>Session limit hit</h4>
+          <div class="big">Wait it out</div>
+          <p>Resets every five hours, and the countdown is on your usage screen. Switch to ordinary chat, which costs a fraction of Cowork, or go and do something else. This is the good outcome.</p>
+        </div>
+        <div class="harsh">
+          <h4>Weekly limit hit</h4>
+          <div class="big">Plan differently</div>
+          <p>Applies across all models and refills only at your fixed weekly slot.<a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan"> ¹</a> Nothing you do speeds this up. The fix is upstream: spread big runs out rather than stacking them.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:var(--s4)">The escape hatch, and why it's not the plan</h3>
+      <p>Pro accounts can turn on <strong>usage credits</strong>: instead of stopping, work continues on pay-as-you-go pricing at standard API rates, with a spending cap you set.<a href="https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans"> ²</a></p>
+      <p>Genuinely useful when a deadline is real. But notice what it does — it converts a planning problem into a billing problem. If credits are how you get through a normal week, the job is too big for how you are running it, and that is what <a href="0005-making-a-task-fit.html">B3</a> is about.</p>
+
+      <div class="onramp">
+        <h3>API rates</h3>
+        <p style="margin-top:.4rem">The per-use price Anthropic charges developers, billed by the token rather than by the month. Credits bill at those rates, so the cost depends on the model — Haiku cheapest, Opus dearest.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mark"><b>Recall</b>no scrolling up</div>
+    <div class="body">
+      <h2>Three from memory</h2>
+      <p class="aside" style="border:0;padding:0;margin-bottom:1.2rem">From memory. Two of these are about what to do under pressure, which is exactly when you will not have time to look them up.</p>
+
+      <div class="check">
+        <div class="q" data-answer="a">
+          <p>You've hit the session limit. What happens next?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">It refills within a few hours</button>
+            <button class="opt" data-k="b" type="button">It refills within a few weeks</button>
+            <button class="opt" data-k="c" type="button">It refills within a few minutes</button>
+          </div>
+          <p class="why" hidden>A few hours — the session resets every five, and your usage screen shows the countdown. This is the mild failure. Ordinary chat costs a fraction of Cowork, so it is often still usable while you wait.</p>
+        </div>
+
+        <div class="q" data-answer="a">
+          <p>You hit a limit with usage credits switched on. Then?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Work continues, billed at API rates</button>
+            <button class="opt" data-k="b" type="button">Work continues, billed at flat rates</button>
+            <button class="opt" data-k="c" type="button">Work pauses until the next reset</button>
+          </div>
+          <p class="why" hidden>It continues on pay-as-you-go at standard API rates, within a cap you set. Worth having enabled for the week something genuinely cannot wait — but if you lean on it routinely, that is a signal to resize the job rather than to keep paying.</p>
+        </div>
+
+        <div class="q" data-answer="a">
+          <p>Before kicking off a long Cowork job, check what?</p>
+          <div class="opts">
+            <button class="opt" data-k="a" type="button">Time left in the current session</button>
+            <button class="opt" data-k="b" type="button">Time left in the current month</button>
+            <button class="opt" data-k="c" type="button">Time left on the current answer</button>
+          </div>
+          <p class="why" hidden>Time left in the session. Starting a forty-minute job with twenty minutes of session left is the single most avoidable way to lose work — and it takes five seconds to check.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <h3>Read one thing</h3>
+    <p><strong>Primary source:</strong>
+      <a href="https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans">Manage usage credits for paid Claude plans</a>
+      — Claude Help Center. Read it once <em>now</em>, while you are not blocked. Deciding whether
+      to enable credits is a calm decision; it makes a poor panicked one.</p>
+
+    <h3 style="margin-top:1.4rem">Citations</h3>
+    <ul class="plain" style="font-size:.9rem">
+      <li>1 · <a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan">What is the Pro plan?</a> — five-hour session reset, weekly limit across all models at a fixed assigned time</li>
+      <li>2 · <a href="https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans">Manage usage credits</a> — pay-as-you-go at standard API rates, with a spending cap</li>
+    </ul>
+
+    <h3 style="margin-top:1.4rem">Next</h3>
+    <p><a href="0003-find-your-meter.html">← B1 — Find your meter</a> · <a href="0005-making-a-task-fit.html">B3 — Making a task fit →</a></p>
+    <p style="margin-top:.5rem"><a href="../reference/usage-card.html">Usage card</a> · <a href="../reference/journey-map.html">Journey map</a></p>
+
+    <div class="ask" style="margin-top:1.4rem">
+      <strong>Send me the two numbers.</strong> Tell me what one Cowork run cost you and I'll tell you
+      what size of job is safe to start on a Tuesday afternoon. And if the calculator says you get
+      fewer runs than you need — say so. That's not you doing it wrong, it's the input to B3.
+    </div>
+  </div>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script src="../assets/meter.js"></script>
+<script src="../assets/budget.js"></script>
+</body>
+</html>

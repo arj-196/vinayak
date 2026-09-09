@@ -83,21 +83,12 @@ build past L04 on that interpretation without a yes.
   markers with `padding-left`, which leaves content flowing as normal inline text however it is
   authored. **Do not reintroduce grid on a list item** unless every child is a single block
   element.
-- **Two audits to re-run whenever a lesson is added** (both caught real bugs on 2026-09-07):
-  1. *Torn-layout audit.* In the browser console, find every grid/flex container whose children
-     mix bare text nodes with elements — that is the condition that tears content across tracks.
-     Should always return zero.
-  2. *Link audit.* Shell one-liner over `href="..."` minus `http`, checking each resolves
-     relative to the file's own directory. This caught the journey map linking to no lessons at
-     all, and L01 not linking to L02.
-- **Convention:** in the journey map, only *written* lessons get a link, and the stage intro says
-  underlined titles are the ready ones. So an unwritten lesson can never look clickable, and
-  adding a lesson means adding its link in the map — treat that as part of writing it.
-- **Preview-pane trap.** Local files open in the preview as a `data:` URL, so relative
-  `<script src>` never resolves and every external script silently no-ops. Do NOT conclude a
-  widget is broken from that. To test scripts for real: `python3 -m http.server 8765` in the
-  workspace, `tabs_create`, then load `http://localhost:8765/...`. Verified this way on
-  2026-09-09 — quiz.js and meter.js both work.
+- **Procedure lives in [CLAUDE.md](CLAUDE.md)** — definition of done for a lesson, the two
+  audits, the preview-pane scripting trap, and the README-index rule. Single source of truth;
+  don't restate it here.
+- `assets/budget.js` — B2's calculator. Takes before/after session and weekly percentages and
+  reports runs-per-session, runs-per-week, and **which clock binds first** — that last line is the
+  non-obvious payload and the reason the widget exists rather than a worked example.
 - `assets/meter.js` — usage-reading recorder for Track B. Readings persist in `localStorage`
   under `claude-usage-readings-v1`, so dropping `<div class="meter" data-label="…">` into a
   later lesson shows every earlier reading beside the new one automatically. **B2 depends on
