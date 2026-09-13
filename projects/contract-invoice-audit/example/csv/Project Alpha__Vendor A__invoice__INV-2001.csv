@@ -1,0 +1,15 @@
+row_kind,project,vendor,doc_type,doc_id,doc_date,ref_quote_id,page,line_no,label_as_printed,description,qty,unit_amount,amount,category,confidence,note,pages_total,pages_read,native_or_scan,mapping_provided,source_file
+line,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,1,1,Task chair TC-200,"Task chair, model TC-200",40,350,14000,PRODUCT,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+line,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,1,2,Desk HA-1600,Height-adjustable desk 1600,40,620,24800,PRODUCT,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+line,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,1,3,Pedestal,Storage pedestal,40,180,7200,PRODUCT,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+line,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,4,Installation,"Installation, 40 workstations, fixed price",,,9600,INSTALL,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+line,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,5,Install labour - additional hours,"Additional installation hours, 32 hrs at 95",32,95,3040,INSTALL,M,matched by principle,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+line,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,6,Project management,Project management fee,,,2400,LABOUR,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+line,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,7,Freight,Freight to site,,,2100,LABOUR,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+line,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,8,Site services,Site services,,,650,UNMAPPED,L,no mapping rule,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+line,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,9,Sales tax,Sales tax 8%,,,3680,EXCLUDED,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+total,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,,Product subtotal,,,,46000,PRODUCT,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+total,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,,Installation,,,,12640,INSTALL,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+total,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,,Services subtotal,,,,4500,LABOUR,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+total,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,2,,Grand total,,,,67470,GRAND,H,,,,,,Project Alpha__Vendor A__invoice__INV-2001.pdf
+coverage,Project Alpha,Vendor A,invoice,INV-2001,2026-07-15,Q-1001,,,,,,,,,,,2,1-2,native,Y,Project Alpha__Vendor A__invoice__INV-2001.pdf

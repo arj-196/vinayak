@@ -35,7 +35,7 @@
   Anthropic's help centre states Team/Enterprise artifacts are organisation-only and cannot be
   published publicly; Free/Pro/Max can publish a link anyone can open without an account.
   Arjun's account is on a work domain, so the artifact link may not reach Vinayak at all.
-  Therefore `Claude-Setup-Check.html` at the workspace root is a self-contained copy that
+  Therefore `Claude-Setup-Check.html` in `learning/` is a self-contained copy that
   works as an emailed/messaged file with no account and no org — generated from
   `assets/intake.html` by `assets/make-standalone.sh`.
   **Re-run that script after every edit to `assets/intake.html`, or the two drift.**
@@ -51,10 +51,16 @@
 Settled: Pro plan (Cowork available and already visible to him), desktop app + phone only,
 Microsoft 365 throughout, Skills at zero, under 30 min/week.
 
-**Still open — the one thing to chase:**
-- The recurring task to automate was left blank. L01 step 1 makes him choose one anyway, and
-  L01 now asks him to report back which he picked. Capture it here when it arrives; L08 and the
-  finish line are built on it.
+**The recurring task has a candidate — 2026-09-13.** Vinayak left it blank on intake; L01 step 1
+still makes him choose one. But Arjun brought a real one: a quote-versus-invoice audit he runs
+inside a single AI chat, which loses its documents once the conversation grows long. The
+analysis and redesign live in [projects/contract-invoice-audit](../projects/contract-invoice-audit/README.md)
+(the prompt itself is deliberately not stored — see [LR-0006](learning-records/0006-workspace-split-learning-projects.md)).
+It is spreadsheet-shaped and repeats per project. One caveat: it runs in his employer's chat-only
+AI, not in Claude, so Cowork cannot touch it and the "implemented" half is Excel formulas. The
+transferable artifact is a plain-text instruction plus a workbook template, which is exactly what
+the mission's honesty note says is portable. **Confirm with Vinayak that this is the one**, and
+whether he has a second recurring task that lives inside Claude, before building L08 on it.
 
 **Confirmation still owed:** the revised MISSION.md is my reading of one sentence he wrote about
 "master processes which can be transferred and implemented". He has not confirmed it. Do not
@@ -83,7 +89,7 @@ build past L04 on that interpretation without a yes.
   markers with `padding-left`, which leaves content flowing as normal inline text however it is
   authored. **Do not reintroduce grid on a list item** unless every child is a single block
   element.
-- **Procedure lives in [CLAUDE.md](CLAUDE.md)** — definition of done for a lesson, the two
+- **Procedure lives in [CLAUDE.md](../CLAUDE.md)** — definition of done for a lesson, the two
   audits, the preview-pane scripting trap, and the README-index rule. Single source of truth;
   don't restate it here.
 - `assets/budget.js` — B2's calculator. Takes before/after session and weekly percentages and

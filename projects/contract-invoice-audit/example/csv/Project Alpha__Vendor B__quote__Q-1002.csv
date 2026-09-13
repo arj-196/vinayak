@@ -1,0 +1,8 @@
+row_kind,project,vendor,doc_type,doc_id,doc_date,ref_quote_id,page,line_no,label_as_printed,description,qty,unit_amount,amount,category,confidence,note,pages_total,pages_read,native_or_scan,mapping_provided,source_file
+line,Project Alpha,Vendor B,quote,Q-1002,2026-05-10,,1,1,Meeting table MT-3200,Meeting table 3200,4,2900,11600,PRODUCT,H,,,,,,Project Alpha__Vendor B__quote__Q-1002.pdf
+line,Project Alpha,Vendor B,quote,Q-1002,2026-05-10,,2,2,Conference chair,Conference chair,32,410,13120,PRODUCT,M,"scan, figure clear",,,,,Project Alpha__Vendor B__quote__Q-1002.pdf
+line,Project Alpha,Vendor B,quote,Q-1002,2026-05-10,,2,3,Credenza,Credenza,4,1450,5800,PRODUCT,L,figure partly legible,,,,,Project Alpha__Vendor B__quote__Q-1002.pdf
+line,Project Alpha,Vendor B,quote,Q-1002,2026-05-10,,3,4,Labour,Delivery and installation,,,4200,INSTALL,M,matched by principle,,,,,Project Alpha__Vendor B__quote__Q-1002.pdf
+total,Project Alpha,Vendor B,quote,Q-1002,2026-05-10,,4,,Product subtotal,,,,30620,PRODUCT,H,,,,,,Project Alpha__Vendor B__quote__Q-1002.pdf
+total,Project Alpha,Vendor B,quote,Q-1002,2026-05-10,,4,,Grand total,,,,34820,GRAND,H,,,,,,Project Alpha__Vendor B__quote__Q-1002.pdf
+coverage,Project Alpha,Vendor B,quote,Q-1002,2026-05-10,,,,,,,,,,,page 5 illegible,5,1-4,scan,Y,Project Alpha__Vendor B__quote__Q-1002.pdf
